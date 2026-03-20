@@ -77,7 +77,7 @@ export default function Hero() {
               src={slides[current].src}
               alt={slides[current].alt}
               className="w-full h-full object-cover object-top"
-              loading={current === 0 ? 'eager' : 'lazy'}
+              loading="eager"
             />
           </motion.div>
         </AnimatePresence>
