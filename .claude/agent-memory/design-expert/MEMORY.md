@@ -1,0 +1,1 @@
+- [project_brand.md](project_brand.md) - Bard Loans brand colors (#E8891D orange, #1B1464 navy), logo details, design direction, tech stack, and key business info for SA micro-lending landing page

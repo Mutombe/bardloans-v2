@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #E8891D;
+  --color-primary-dark: #D17516;
+  --color-primary-light: #F5A623;
+  --color-primary-50: #FFF7ED;
+  --color-primary-100: #FFEDD5;
+  --color-primary-200: #FED7AA;
+  --color-navy: #1B1464;
+  --color-navy-light: #2D2A6E;
+  --color-navy-dark: #0D0A35;
+  --color-navy-50: #EEEDFA;
+  --color-mint: #14B8A6;
+  --color-mint-light: #5EEAD4;
+  --color-mint-dark: #0D9488;
+  --color-mint-50: #F0FDFA;
+  --color-warm-white: #FFFBF5;
+  --color-warm-gray: #F8F6F3;
+
+  --color-navy-warm: #2D2478;
+
+  --font-family-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-family-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-body);
+  color: #1a1a2e;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+}
+
+/* Custom range slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #E8891D var(--progress, 50%), #e5e7eb var(--progress, 50%));
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #E8891D;
+  box-shadow: 0 2px 8px rgba(232, 137, 29, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(232, 137, 29, 0.4);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #E8891D;
+  box-shadow: 0 2px 8px rgba(232, 137, 29, 0.3);
+  cursor: pointer;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1B1464;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E8891D;
+}
+
+/* Selection color */
+::selection {
+  background-color: #14B8A6;
+  color: white;
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 2px solid #14B8A6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Scroll margin for nav anchors */
+[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Hero carousel crossfade */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Subtle float */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse glow for CTA */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(20, 184, 166, 0); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}

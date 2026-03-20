@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(python -c \":*)",
+      "Bash(npm create:*)",
+      "Bash(npx --yes create-vite@latest temp-scaffold --template react)",
+      "Bash(cp -r temp-scaffold/* temp-scaffold/.gitignore .)",
+      "Bash(rm -rf temp-scaffold)",
+      "Bash(npm install:*)",
+      "WebFetch(domain:api.unsplash.com)",
+      "Bash(mkdir -p /c/Users/PC/documents/bardloans-v2/src/components)",
+      "Bash(mkdir -p /c/Users/PC/documents/bardloans-v2/public)",
+      "Bash(cp /c/Users/PC/documents/bardloans-v2/favicon.png /c/Users/PC/documents/bardloans-v2/public/)",
+      "Bash(cp /c/Users/PC/documents/bardloans-v2/logo.png /c/Users/PC/documents/bardloans-v2/public/)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(curl -s http://localhost:5180)",
+      "Bash(pip install:*)",
+      "Bash(python:*)"
+    ]
+  }
+}
