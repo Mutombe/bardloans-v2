@@ -3,90 +3,54 @@ import { useRef } from 'react'
 import { Scales, ShieldCheck, RocketLaunch } from '@phosphor-icons/react'
 
 const features = [
-  {
-    icon: Scales,
-    title: 'Salary-based flexibility',
-    description: 'Loans tailored to your income. We assess what you can comfortably afford, so repayments never stretch you thin.',
-    accent: 'bg-primary/10',
-    iconColor: 'text-primary',
-    border: 'hover:border-primary/20',
-    href: '#offerings',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Transparent pricing',
-    description: 'No hidden fees, no surprises. Every cost is laid out upfront — interest, initiation, and service fees all clearly stated.',
-    accent: 'bg-mint/10',
-    iconColor: 'text-mint-dark',
-    border: 'hover:border-mint/20',
-    href: '#calculator',
-  },
-  {
-    icon: RocketLaunch,
-    title: 'Fast and Secure',
-    description: 'Same-day approvals in a secure environment. Your data is protected, and your cash arrives fast when you need it most.',
-    accent: 'bg-navy/10',
-    iconColor: 'text-navy',
-    border: 'hover:border-navy/20',
-    href: '#how-it-works',
-  },
+  { icon: Scales, title: 'Salary-Based Flexibility', description: 'Loans tailored to your income. Repayments that work for you.', href: '#offerings' },
+  { icon: ShieldCheck, title: 'Transparent Pricing', description: 'Every fee upfront. No surprises, no hidden costs.', href: '#calculator' },
+  { icon: RocketLaunch, title: 'Fast & Secure', description: 'Same-day approval. Your data protected, cash delivered.', href: '#how-it-works' },
 ]
-
-function FeatureCard({ feature, index }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-50px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.12 }}
-      className="group"
-    >
-      <a href={feature.href} className={`block bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl border border-gray-100 ${feature.border} transition-all duration-500 h-full hover:-translate-y-1 no-underline`}>
-        <motion.div
-          whileHover={{ rotate: [0, -8, 8, 0] }}
-          transition={{ duration: 0.5 }}
-          className={`w-14 h-14 rounded-xl ${feature.accent} flex items-center justify-center mb-5`}
-        >
-          <feature.icon size={28} weight="duotone" className={feature.iconColor} />
-        </motion.div>
-        <h3 className="text-lg font-bold text-navy mb-2">{feature.title}</h3>
-        <p className="text-gray-500 text-sm leading-relaxed">{feature.description}</p>
-      </a>
-    </motion.div>
-  )
-}
 
 export default function Features() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="py-16 sm:py-24 bg-white relative" id="features">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
-        >
-          <span className="inline-block bg-mint/10 text-mint-dark font-semibold text-xs px-3 py-1 rounded-full mb-3 tracking-wide uppercase">
-            Why Choose Us
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy mb-3">
-            Why Choose <span className="text-primary">Bard Loans?</span>
+    <section className="py-20 sm:py-28 bg-warm-white relative overflow-hidden" id="features">
+      {[
+        { x: '92%', y: '20%', r: -25, o: 0.05, c: '#14B8A6' },
+        { x: '6%', y: '70%', r: 35, o: 0.06, c: '#E8891D' },
+      ].map((t, i) => (
+        <div key={i} className="absolute pointer-events-none" style={{ left: t.x, top: t.y, opacity: t.o }}>
+          <svg width="14" height="14" viewBox="0 0 20 20" style={{ transform: `rotate(${t.r}deg)` }}><polygon points="10,2 18,18 2,18" fill={t.c} /></svg>
+        </div>
+      ))}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy mb-4 uppercase tracking-tight">
+            Why{' '}
+            <span className="relative inline-block">
+              <span className="relative z-10 px-3 text-white">Bard?</span>
+              <span className="absolute inset-0 bg-primary rounded-md skew-x-[-2deg]" />
+            </span>
           </h2>
-          <p className="text-gray-400 max-w-lg mx-auto text-sm sm:text-base">
-            We make borrowing simple, fair, and fast. Here&apos;s what sets us apart.
-          </p>
+          <p className="text-gray-500 max-w-lg mx-auto text-lg">Simple, fair, and fast lending.</p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <div className="grid sm:grid-cols-3 gap-6">
           {features.map((feature, index) => (
-            <FeatureCard key={feature.title} feature={feature} index={index} />
+            <motion.a
+              key={feature.title}
+              href={feature.href}
+              initial={{ opacity: 0, y: 25 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-white rounded-2xl p-8 sm:p-10 border-2 border-gray-100 hover:border-primary transition-all duration-300 hover:-translate-y-1 block group text-center"
+            >
+              <div className="w-20 h-20 rounded-full bg-primary/10 group-hover:bg-primary flex items-center justify-center mb-6 mx-auto transition-all duration-300">
+                <feature.icon size={40} weight="bold" className="text-primary group-hover:text-white transition-colors" />
+              </div>
+              <h3 className="text-xl font-extrabold text-navy mb-3 uppercase">{feature.title}</h3>
+              <p className="text-gray-500 text-base leading-relaxed">{feature.description}</p>
+            </motion.a>
           ))}
         </div>
       </div>

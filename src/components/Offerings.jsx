@@ -3,14 +3,14 @@ import { useRef } from 'react'
 import { User, Timer, Wallet, Lightning, PaperPlaneTilt, Car, SolarPanel, Package } from '@phosphor-icons/react'
 
 const offerings = [
-  { icon: User, title: 'Personal Loans', description: 'Flexible personal loans tailored to your individual financial needs and goals.', color: 'bg-primary/10', iconColor: 'text-primary' },
-  { icon: Timer, title: 'Short Term Loans', description: 'Quick-turnaround loans from 1 to 3 months. Get funded, get on with life.', color: 'bg-navy/10', iconColor: 'text-navy' },
-  { icon: Wallet, title: 'Salary Based', description: 'Loans assessed on your income. Repayments structured around affordability.', color: 'bg-mint/10', iconColor: 'text-mint-dark' },
-  { icon: Lightning, title: 'Quick Loans', description: 'Same-day approval and fast disbursement when you need cash urgently.', color: 'bg-amber-500/10', iconColor: 'text-amber-600' },
-  { icon: PaperPlaneTilt, title: 'Send Now Pay Later', description: 'Get what you need now and pay back in manageable monthly instalments.', color: 'bg-violet-500/10', iconColor: 'text-violet-600' },
-  { icon: Car, title: 'Collateral Based', description: 'Secure larger amounts using your vehicles or machinery as collateral.', color: 'bg-blue-500/10', iconColor: 'text-blue-600' },
-  { icon: SolarPanel, title: 'Solar & Borehole', description: 'Finance solar installations and borehole systems. Invest in your property.', color: 'bg-emerald-500/10', iconColor: 'text-emerald-600' },
-  { icon: Package, title: 'Grocery & Stands', description: 'Finance groceries and property stands. Practical solutions for everyday needs.', color: 'bg-rose-500/10', iconColor: 'text-rose-600' },
+  { icon: User, title: 'Personal Loans', description: 'Tailored to your needs.' },
+  { icon: Timer, title: 'Short Term', description: '1 to 3 months terms.' },
+  { icon: Wallet, title: 'Salary Based', description: 'Based on your income.' },
+  { icon: Lightning, title: 'Quick Loans', description: 'Same-day cash.' },
+  { icon: PaperPlaneTilt, title: 'Pay Later', description: 'Get now, pay monthly.' },
+  { icon: Car, title: 'Collateral', description: 'Use assets as security.' },
+  { icon: SolarPanel, title: 'Solar & Borehole', description: 'Finance installations.' },
+  { icon: Package, title: 'Grocery & Stands', description: 'Everyday financing.' },
 ]
 
 export default function Offerings() {
@@ -18,52 +18,45 @@ export default function Offerings() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="offerings" className="py-16 sm:py-24 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
-        >
-          <span className="inline-block bg-navy/8 text-navy font-semibold text-xs px-3 py-1 rounded-full mb-3 tracking-wide uppercase">
-            Our Offerings
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy mb-3">
-            Loan Solutions <span className="text-primary">For You</span>
+    <section id="offerings" className="py-20 sm:py-28 bg-white relative overflow-hidden">
+      {[
+        { x: '4%', y: '15%', r: 30, o: 0.05, c: '#E8891D' },
+        { x: '95%', y: '80%', r: -45, o: 0.04, c: '#14B8A6' },
+      ].map((t, i) => (
+        <div key={i} className="absolute pointer-events-none" style={{ left: t.x, top: t.y, opacity: t.o }}>
+          <svg width="14" height="14" viewBox="0 0 20 20" style={{ transform: `rotate(${t.r}deg)` }}><polygon points="10,2 18,18 2,18" fill={t.c} /></svg>
+        </div>
+      ))}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy mb-4 uppercase tracking-tight">
+            Our{' '}
+            <span className="relative inline-block">
+              <span className="relative z-10 px-3 text-white">Offerings</span>
+              <span className="absolute inset-0 bg-navy rounded-md skew-x-[-2deg]" />
+            </span>
           </h2>
-          <p className="text-gray-400 max-w-lg mx-auto text-sm sm:text-base">
-            From quick cash to property investments — a lending solution for every need.
-          </p>
+          <p className="text-gray-500 max-w-lg mx-auto text-lg">A solution for every need.</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
-          {offerings.map((offering, index) => {
-            const CardWrapper = () => {
-              const cardRef = useRef(null)
-              const cardInView = useInView(cardRef, { once: true, margin: '-20px' })
-
-              return (
-                <motion.div
-                  ref={cardRef}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={cardInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="group"
-                >
-                  <a href="#calculator" className="block bg-white rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-lg border border-gray-100 hover:border-mint/20 transition-all duration-500 h-full hover:-translate-y-1 no-underline">
-                    <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl ${offering.color} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <offering.icon size={22} weight="duotone" className={offering.iconColor} />
-                    </div>
-                    <h3 className="text-sm sm:text-base font-bold text-navy mb-1">{offering.title}</h3>
-                    <p className="text-gray-400 text-[11px] sm:text-xs leading-relaxed">{offering.description}</p>
-                  </a>
-                </motion.div>
-              )
-            }
-            return <CardWrapper key={offering.title} />
-          })}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {offerings.map((offering, index) => (
+            <motion.a
+              key={offering.title}
+              href="#calculator"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="bg-warm-white rounded-2xl p-5 sm:p-6 border-2 border-transparent hover:border-primary transition-all duration-300 hover:-translate-y-1 block group text-center"
+            >
+              <div className="w-16 h-16 rounded-full bg-primary/10 group-hover:bg-primary flex items-center justify-center mb-4 mx-auto transition-all duration-300">
+                <offering.icon size={32} weight="bold" className="text-primary group-hover:text-white transition-colors" />
+              </div>
+              <h3 className="text-base sm:text-lg font-extrabold text-navy mb-1 uppercase">{offering.title}</h3>
+              <p className="text-gray-400 text-sm">{offering.description}</p>
+            </motion.a>
+          ))}
         </div>
       </div>
     </section>

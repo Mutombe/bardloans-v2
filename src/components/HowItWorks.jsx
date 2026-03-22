@@ -3,10 +3,10 @@ import { useRef } from 'react'
 import { UserPlus, Calculator, ClockClockwise, CurrencyCircleDollar } from '@phosphor-icons/react'
 
 const steps = [
-  { icon: UserPlus, step: '01', title: 'Apply Online', description: 'Fill in a quick application with your basic details and employment info.' },
-  { icon: Calculator, step: '02', title: 'Get Assessed', description: 'We assess your affordability based on your salary for the best terms.' },
-  { icon: ClockClockwise, step: '03', title: 'Quick Approval', description: 'Same-day approval. No long waits, no unnecessary paperwork.' },
-  { icon: CurrencyCircleDollar, step: '04', title: 'Get Your Cash', description: 'Money deposited directly into your bank account. Fast and secure.' },
+  { icon: UserPlus, step: '01', title: 'Apply', description: 'Quick online application.' },
+  { icon: Calculator, step: '02', title: 'Assessed', description: 'Based on your salary.' },
+  { icon: ClockClockwise, step: '03', title: 'Approved', description: 'Same-day decision.' },
+  { icon: CurrencyCircleDollar, step: '04', title: 'Get Cash', description: 'Straight to your account.' },
 ]
 
 export default function HowItWorks() {
@@ -14,62 +14,55 @@ export default function HowItWorks() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="how-it-works" className="py-16 sm:py-24 bg-gradient-to-b from-warm-white to-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-72 h-72 bg-mint/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+    <section id="how-it-works" className="py-20 sm:py-28 bg-navy-dark relative overflow-hidden">
+      {[
+        { x: '8%', y: '20%', r: 15, o: 0.06, c: '#E8891D' },
+        { x: '88%', y: '70%', r: -30, o: 0.05, c: '#5EEAD4' },
+      ].map((t, i) => (
+        <div key={i} className="absolute pointer-events-none" style={{ left: t.x, top: t.y, opacity: t.o }}>
+          <svg width="16" height="16" viewBox="0 0 20 20" style={{ transform: `rotate(${t.r}deg)` }}><polygon points="10,2 18,18 2,18" fill={t.c} /></svg>
+        </div>
+      ))}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
-        >
-          <span className="inline-block bg-navy/8 text-navy font-semibold text-xs px-3 py-1 rounded-full mb-3 tracking-wide uppercase">
-            Simple Process
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy mb-3">
-            How it <span className="text-primary">Works</span>
+        <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 uppercase tracking-tight">
+            How it{' '}
+            <span className="relative inline-block">
+              <span className="relative z-10 px-3 text-navy-dark">Works</span>
+              <span className="absolute inset-0 bg-primary rounded-md skew-x-[-2deg]" />
+            </span>
           </h2>
-          <p className="text-gray-400 max-w-lg mx-auto text-sm sm:text-base">
-            Getting your loan is as easy as 1-2-3-4. No complicated forms.
-          </p>
+          <p className="text-white/40 max-w-lg mx-auto text-lg">Four simple steps to your cash.</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative">
-          <div className="hidden lg:block absolute top-14 left-[15%] right-[15%] h-px bg-gradient-to-r from-mint/10 via-mint/30 to-mint/10" />
-
-          {steps.map((step, index) => {
-            const StepCard = () => {
-              const cardRef = useRef(null)
-              const cardInView = useInView(cardRef, { once: true, margin: '-30px' })
-
-              return (
-                <motion.div
-                  ref={cardRef}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={cardInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="relative text-center group"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="w-20 h-20 sm:w-28 sm:h-28 mx-auto mb-4 rounded-full bg-white shadow-md shadow-navy/5 border border-gray-100 group-hover:border-mint/20 flex items-center justify-center relative transition-all duration-500"
-                  >
-                    <step.icon size={32} weight="duotone" className="text-primary sm:hidden" />
-                    <step.icon size={44} weight="duotone" className="text-primary hidden sm:block" />
-                    <div className="absolute -top-1 -right-1 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-navy text-white text-[10px] sm:text-xs font-bold flex items-center justify-center shadow-md">
-                      {step.step}
-                    </div>
-                  </motion.div>
-                  <h3 className="text-sm sm:text-lg font-bold text-navy mb-1">{step.title}</h3>
-                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-[180px] mx-auto hidden sm:block">{step.description}</p>
-                </motion.div>
-              )
-            }
-            return <StepCard key={step.step} />
-          })}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.step}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="text-center group"
+            >
+              <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-5 rounded-full bg-white/[0.05] border-2 border-white/10 group-hover:border-primary flex items-center justify-center relative transition-all duration-300">
+                <step.icon size={44} weight="bold" className="text-primary" />
+                <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-primary text-navy-dark text-sm font-extrabold flex items-center justify-center">
+                  {step.step}
+                </div>
+              </div>
+              <h3 className="text-lg sm:text-xl font-extrabold text-white mb-1 uppercase">{step.title}</h3>
+              <p className="text-white/40 text-base">{step.description}</p>
+            </motion.div>
+          ))}
         </div>
+
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.6 }} className="text-center mt-14">
+          <a href="#calculator" className="inline-flex items-center gap-2 bg-white text-navy-dark font-extrabold text-base px-10 py-4 rounded-full hover:scale-105 transition-transform uppercase tracking-wide shadow-xl">
+            Apply Online Now
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" /><path d="M10 8l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </a>
+        </motion.div>
       </div>
     </section>
   )

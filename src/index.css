@@ -20,8 +20,8 @@
 
   --color-navy-warm: #2D2478;
 
-  --font-family-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-family-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-family-heading: 'Outfit', system-ui, sans-serif;
+  --font-family-body: 'Outfit', system-ui, sans-serif;
 }
 
 /* Base styles */
@@ -32,10 +32,17 @@ html {
 body {
   margin: 0;
   font-family: var(--font-family-body);
+  font-size: 16px;
   color: #1a1a2e;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 640px) {
+  body {
+    font-size: 17px;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {

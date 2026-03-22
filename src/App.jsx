@@ -9,7 +9,7 @@ import DetailedCalculator from './components/DetailedCalculator'
 import FAQ from './components/FAQ'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
-import ScrollToTop from './components/ScrollToTop'
+import FloatingWhatsApp from './components/FloatingWhatsApp'
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
       <FAQ />
       <CTA />
       <Footer />
-      <ScrollToTop />
+      <FloatingWhatsApp />
     </div>
   )
 }

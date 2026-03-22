@@ -51,13 +51,13 @@ export default function LoanCalculator({ compact = false }) {
       <div className="h-0.5 w-12 bg-mint rounded-full mb-4 mx-auto" />
 
       <div className="text-center mb-4">
-        <h3 className={`${textMain} font-bold ${compact ? 'text-base' : 'text-xl'}`}>How much do you need?</h3>
-        {!compact && <p className={`${textMuted} text-xs mt-1`}>Use the calculator below — then apply via WhatsApp or Email</p>}
+        <h3 className={`${textMain} font-extrabold ${compact ? 'text-lg' : 'text-2xl'} uppercase`}>How much do you need?</h3>
+        {!compact && <p className={`${textMuted} text-sm mt-1`}>Calculate — then apply via WhatsApp or Email</p>}
       </div>
 
       {/* Amount */}
       <motion.div key={amount} initial={{ scale: 0.97 }} animate={{ scale: 1 }} className="text-center mb-1">
-        <span className={`${compact ? 'text-3xl sm:text-4xl' : 'text-4xl sm:text-5xl'} font-extrabold ${textMain} tracking-tight`}>
+        <span className={`${compact ? 'text-4xl' : 'text-5xl sm:text-6xl'} font-extrabold ${textMain} tracking-tight`}>
           R{amount.toLocaleString()}
         </span>
       </motion.div>
@@ -73,8 +73,8 @@ export default function LoanCalculator({ compact = false }) {
 
       {/* Duration */}
       <div className="mb-5">
-        <label className={`text-xs font-semibold ${textSub} flex items-center gap-1.5 mb-2`}>
-          <CalendarBlank size={14} weight="bold" className="text-mint" />
+        <label className={`text-sm font-bold ${textSub} flex items-center gap-1.5 mb-2 uppercase`}>
+          <CalendarBlank size={16} weight="bold" className="text-mint" />
           Repayment period
         </label>
         <div className="grid grid-cols-3 gap-1.5">
@@ -82,7 +82,7 @@ export default function LoanCalculator({ compact = false }) {
             <motion.button
               key={m}
               onClick={() => setMonths(m)}
-              className={`py-2 ${compact ? '' : 'sm:py-2.5'} rounded-lg text-xs font-bold transition-all duration-300 cursor-pointer ${
+              className={`py-2.5 ${compact ? '' : 'sm:py-3'} rounded-lg text-sm font-bold transition-all duration-300 cursor-pointer ${
                 months === m ? 'bg-mint text-white shadow-md shadow-mint/20' : btnInactiveBg
               }`}
               whileHover={{ scale: 1.03 }}
