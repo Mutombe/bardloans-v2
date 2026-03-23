@@ -4,8 +4,8 @@ import { Lightning, CaretLeft, CaretRight } from '@phosphor-icons/react'
 import LoanCalculator from './LoanCalculator'
 
 const slides = [
-  { src: '/HERO.png', alt: 'Happy woman with cash from Bard Loans' },
-  { src: '/HERO2.png', alt: 'Happy man with cash from Bard Loans' },
+  { src: '/Model image holding rands_.png', alt: 'Woman holding South African Rands', bg: '#0D0A35' },
+  { src: '/Model image with family.png', alt: 'Happy family empowered by Bard Loans', bg: '#E8891D' },
 ]
 
 function ScatteredTriangles() {
@@ -56,29 +56,44 @@ export default function Hero() {
   }, [next])
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden bg-gradient-to-br from-navy-dark via-navy to-navy-warm">
-      {/* Background carousel */}
-      <div className="absolute inset-0">
+    <section id="home" className="relative min-h-screen overflow-hidden bg-navy-dark">
+      {/* Background: solid bg color per slide */}
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={`bg-${current}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          className="absolute inset-0"
+          style={{ backgroundColor: slides[current].bg }}
+        />
+      </AnimatePresence>
+
+      {/* Person image — full-screen cover on mobile (face at top), contained right on desktop */}
+      <div className="absolute inset-0 pointer-events-none">
         <AnimatePresence mode="sync">
-          <motion.div
+          <motion.img
             key={current}
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
+            src={slides[current].src}
+            alt={slides[current].alt}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: 'easeInOut' }}
-            className="absolute inset-0"
-          >
-            <img src={slides[current].src} alt={slides[current].alt} className="w-full h-full object-cover object-top" loading="eager" />
-          </motion.div>
+            className="absolute
+              inset-0 w-full h-full object-cover object-top
+              lg:inset-auto lg:w-auto lg:h-[85%] lg:bottom-0 lg:right-[5%] lg:object-contain lg:object-bottom"
+            loading="eager"
+          />
         </AnimatePresence>
-
-        {/* Desktop: left fade for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-dark via-navy-dark/90 via-40% to-navy-dark/10 hidden lg:block" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-transparent via-25% to-transparent hidden lg:block" />
-
-        {/* Mobile: transparent top (face visible) → dark bottom (text readable) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-35% to-navy-dark lg:hidden" />
       </div>
+
+      {/* Overlays for text readability */}
+      {/* Desktop: left side dark fade */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[--bg]/95 via-[--bg]/70 via-45% to-transparent hidden lg:block" style={{ '--bg': slides[current].bg === '#0D0A35' ? '#0D0A35' : '#1B1464' }} />
+      {/* Mobile: bottom dark fade so text is readable, top is clear to see face */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-[--bg] lg:hidden" style={{ '--bg': slides[current].bg === '#0D0A35' ? '#0D0A35' : '#0D0A35' }} />
 
       <ScatteredTriangles />
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/[0.05] blur-3xl pointer-events-none hidden lg:block" />
@@ -87,17 +102,17 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex lg:items-center items-end">
         <div className="w-full pb-24 lg:pb-0 lg:pt-0">
           <div className="grid lg:grid-cols-12 gap-6 items-center">
-            {/* Text content */}
+            {/* Text */}
             <div className="lg:col-span-5">
               <motion.a
                 href="#calculator"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-2 bg-mint/15 backdrop-blur-sm border border-mint/20 rounded-full px-3.5 py-1.5 mb-4 hover:bg-mint/25 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-3.5 py-1.5 mb-4 hover:bg-white/25 transition-colors cursor-pointer"
               >
-                <Lightning size={14} weight="fill" className="text-mint-light" />
-                <span className="text-mint-light text-[11px] font-semibold tracking-wide uppercase">Same-Day Approval</span>
+                <Lightning size={14} weight="fill" className="text-white" />
+                <span className="text-white text-[11px] font-semibold tracking-wide uppercase">Same-Day Approval</span>
               </motion.a>
 
               <motion.h1
@@ -115,7 +130,6 @@ export default function Hero() {
                 Online <span className="text-primary">Today!</span>
               </motion.h1>
 
-              {/* Pills + CTA — row on mobile for simplicity */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -144,22 +158,21 @@ export default function Hero() {
                 </svg>
               </motion.a>
 
-              {/* Carousel dots */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
                 className="flex items-center gap-3 mt-6"
               >
-                <button onClick={prev} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/25 transition-all cursor-pointer">
+                <button onClick={prev} className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all cursor-pointer">
                   <CaretLeft size={14} weight="bold" />
                 </button>
                 <div className="flex gap-1.5">
                   {slides.map((_, i) => (
-                    <button key={i} onClick={() => setCurrent(i)} className={`h-1 rounded-full transition-all duration-500 cursor-pointer ${i === current ? 'w-7 bg-primary' : 'w-2.5 bg-white/15 hover:bg-white/25'}`} />
+                    <button key={i} onClick={() => setCurrent(i)} className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${i === current ? 'w-7 bg-white' : 'w-2.5 bg-white/20 hover:bg-white/30'}`} />
                   ))}
                 </div>
-                <button onClick={next} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/25 transition-all cursor-pointer">
+                <button onClick={next} className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all cursor-pointer">
                   <CaretRight size={14} weight="bold" />
                 </button>
               </motion.div>
@@ -167,7 +180,6 @@ export default function Hero() {
 
             <div className="hidden lg:block lg:col-span-3" />
 
-            {/* Calculator — desktop only */}
             <div className="hidden lg:flex lg:col-span-4 justify-end">
               <LoanCalculator compact />
             </div>
@@ -175,7 +187,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom wave */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <svg viewBox="0 0 1440 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
           <path d="M0 70L48 63C96 56 192 42 288 36.7C384 31 480 35 576 39C672 43 768 47 864 46.7C960 47 1056 42 1152 38C1248 34 1344 32 1392 31L1440 30V70H0Z" fill="white" />
