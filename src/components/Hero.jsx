@@ -4,7 +4,7 @@ import { Lightning, CaretLeft, CaretRight } from '@phosphor-icons/react'
 import LoanCalculator from './LoanCalculator'
 
 const slides = [
-  { src: '/Model image holding rands_.png', alt: 'Woman holding South African Rands', bg: '#0D0A35' },
+  { src: '/orange.jpeg', alt: 'Woman holding South African Rands', bg: '#0D0A35' },
   { src: '/Model image with family.png', alt: 'Happy family empowered by Bard Loans', bg: '#E8891D' },
 ]
 
