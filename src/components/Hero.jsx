@@ -4,7 +4,7 @@ import { Lightning, CaretLeft, CaretRight } from '@phosphor-icons/react'
 import LoanCalculator from './LoanCalculator'
 
 const slides = [
-  { src: '/orange.jpeg', alt: 'Woman holding South African Rands', bg: '#0D0A35' },
+  { src: '/orange.jpeg', alt: 'Woman holding South African Rands', bg: '#E8891D' },
   { src: '/Model image with family.png', alt: 'Happy family empowered by Bard Loans', bg: '#E8891D' },
 ]
 
@@ -83,17 +83,17 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: 'easeInOut' }}
             className="absolute
               inset-0 w-full h-full object-cover object-top
-              lg:inset-auto lg:w-auto lg:h-[85%] lg:bottom-0 lg:right-[5%] lg:object-contain lg:object-bottom"
+              lg:inset-0 lg:w-full lg:h-full lg:object-cover lg:object-top"
             loading="eager"
           />
         </AnimatePresence>
       </div>
 
       {/* Overlays for text readability */}
-      {/* Desktop: left side dark fade */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[--bg]/95 via-[--bg]/70 via-45% to-transparent hidden lg:block" style={{ '--bg': slides[current].bg === '#0D0A35' ? '#0D0A35' : '#1B1464' }} />
-      {/* Mobile: bottom dark fade so text is readable, top is clear to see face */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-[--bg] lg:hidden" style={{ '--bg': slides[current].bg === '#0D0A35' ? '#0D0A35' : '#0D0A35' }} />
+      {/* Desktop: left dark fade so text is readable, image visible on right */}
+      <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/95 via-navy-dark/80 via-50% to-navy-dark/10 hidden lg:block" />
+      {/* Mobile: top clear (face visible), bottom dark (text readable) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-navy-dark lg:hidden" />
 
       <ScatteredTriangles />
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/[0.05] blur-3xl pointer-events-none hidden lg:block" />
