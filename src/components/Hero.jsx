@@ -4,8 +4,8 @@ import { Lightning, CaretLeft, CaretRight } from '@phosphor-icons/react'
 import LoanCalculator from './LoanCalculator'
 
 const slides = [
-  { src: '/orange.jpeg', alt: 'Woman holding South African Rands', bg: '#E8891D' },
-  { src: '/Model image with family.png', alt: 'Happy family empowered by Bard Loans', bg: '#E8891D' },
+  { src: '/orange girl .jpg.jpeg', alt: 'Woman holding South African Rands', bg: '#E8891D' },
+  { src: '/Orange fam .jpg.jpeg', alt: 'Happy family empowered by Bard Loans', bg: '#E8891D' },
 ]
 
 function ScatteredTriangles() {
