@@ -13,7 +13,7 @@ import FloatingWhatsApp from './components/FloatingWhatsApp'
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F5F5F4]">
       <Navbar />
       <Hero />
       <AboutUs />

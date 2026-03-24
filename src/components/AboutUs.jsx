@@ -14,7 +14,7 @@ export default function AboutUs() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="py-20 sm:py-28 bg-white relative overflow-hidden">
+    <section id="about" className="py-20 sm:py-28 bg-[#F5F5F4] relative overflow-hidden">
       {[
         { x: '90%', y: '10%', r: 20, o: 0.06, c: '#E8891D' },
         { x: '3%', y: '55%', r: -40, o: 0.05, c: '#14B8A6' },
@@ -44,7 +44,7 @@ export default function AboutUs() {
             <div className="relative">
               <div className="absolute -left-2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-mint to-transparent rounded-full" />
               <p className="pl-5 text-navy text-xl sm:text-2xl leading-snug" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic' }}>
-                <span className="text-primary font-bold">A loan when you need it most!</span>
+                <span className="text-primary font-bold">Your reliable financial partner when it matters most!</span>
               </p>
             </div>
           </motion.div>

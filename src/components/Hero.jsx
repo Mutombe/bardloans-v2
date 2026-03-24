@@ -90,8 +90,8 @@ export default function Hero() {
       </div>
 
       {/* Overlays for text readability */}
-      {/* Desktop: left dark fade so text is readable, image visible on right */}
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/95 via-navy-dark/80 via-50% to-navy-dark/10 hidden lg:block" />
+      {/* Desktop: narrow left fade — only covers ~25% of the screen */}
+      <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/90 via-navy-dark/40 via-25% to-transparent hidden lg:block" />
       {/* Mobile: top clear (face visible), bottom dark (text readable) */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-navy-dark lg:hidden" />
 
@@ -189,7 +189,7 @@ export default function Hero() {
 
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <svg viewBox="0 0 1440 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-          <path d="M0 70L48 63C96 56 192 42 288 36.7C384 31 480 35 576 39C672 43 768 47 864 46.7C960 47 1056 42 1152 38C1248 34 1344 32 1392 31L1440 30V70H0Z" fill="white" />
+          <path d="M0 70L48 63C96 56 192 42 288 36.7C384 31 480 35 576 39C672 43 768 47 864 46.7C960 47 1056 42 1152 38C1248 34 1344 32 1392 31L1440 30V70H0Z" fill="#F5F5F4" />
         </svg>
       </div>
     </section>
