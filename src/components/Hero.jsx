@@ -189,7 +189,7 @@ export default function Hero() {
 
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <svg viewBox="0 0 1440 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-          <path d="M0 70L48 63C96 56 192 42 288 36.7C384 31 480 35 576 39C672 43 768 47 864 46.7C960 47 1056 42 1152 38C1248 34 1344 32 1392 31L1440 30V70H0Z" fill="#F5F5F4" />
+          <path d="M0 70L48 63C96 56 192 42 288 36.7C384 31 480 35 576 39C672 43 768 47 864 46.7C960 47 1056 42 1152 38C1248 34 1344 32 1392 31L1440 30V70H0Z" fill="white" />
         </svg>
       </div>
     </section>

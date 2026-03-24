@@ -69,6 +69,7 @@ export default function CTA() {
           </motion.div>
         </div>
       </div>
+      <BrandPattern variant="navy" className="h-12 sm:h-16 relative z-[1]" />
     </section>
   )
 }

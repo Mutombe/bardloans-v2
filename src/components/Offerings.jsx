@@ -18,7 +18,7 @@ export default function Offerings() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="offerings" className="py-20 sm:py-28 bg-[#F5F5F4] relative overflow-hidden">
+    <section id="offerings" className="py-20 sm:py-28 bg-white relative overflow-hidden">
       {[
         { x: '4%', y: '15%', r: 30, o: 0.05, c: '#E8891D' },
         { x: '95%', y: '80%', r: -45, o: 0.04, c: '#14B8A6' },

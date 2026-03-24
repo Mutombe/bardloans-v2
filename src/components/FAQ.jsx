@@ -52,7 +52,7 @@ export default function FAQ() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="faq" className="py-20 sm:py-28 bg-[#F5F5F4] relative">
+    <section id="faq" className="py-20 sm:py-28 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy mb-4 uppercase tracking-tight">

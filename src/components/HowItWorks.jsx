@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { UserPlus, Calculator, ClockClockwise, CurrencyCircleDollar } from '@phosphor-icons/react'
+import BrandPattern from './BrandPattern'
 
 const steps = [
   { icon: UserPlus, step: '01', title: 'Apply', description: 'Quick online application.' },
@@ -14,7 +15,9 @@ export default function HowItWorks() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="how-it-works" className="py-20 sm:py-28 bg-navy-dark relative overflow-hidden">
+    <section id="how-it-works" className="bg-navy-dark relative overflow-hidden">
+      <BrandPattern variant="navy" className="h-12 sm:h-16 relative z-[1]" />
+      <div className="py-20 sm:py-28 relative">
       {[
         { x: '8%', y: '20%', r: 15, o: 0.06, c: '#E8891D' },
         { x: '88%', y: '70%', r: -30, o: 0.05, c: '#5EEAD4' },
@@ -64,6 +67,8 @@ export default function HowItWorks() {
           </a>
         </motion.div>
       </div>
+      </div>
+      <BrandPattern variant="navy" className="h-12 sm:h-16 relative z-[1]" />
     </section>
   )
 }
