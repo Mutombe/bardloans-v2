@@ -90,8 +90,6 @@ export default function Hero() {
       </div>
 
       {/* Overlays for text readability */}
-      {/* Desktop: narrow left fade — only covers ~25% of the screen */}
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/90 via-navy-dark/40 via-25% to-transparent hidden lg:block" />
       {/* Mobile: top clear (face visible), bottom dark (text readable) */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-navy-dark lg:hidden" />
 
@@ -127,7 +125,7 @@ export default function Hero() {
                   <span className="absolute inset-0 bg-primary rounded-md skew-x-[-2deg]" />
                 </span>{' '}
                 <br className="hidden sm:block" />
-                Online <span className="text-primary">Today!</span>
+                Online<span className="lg:hidden text-primary"> Today!</span>
               </motion.h1>
 
               <motion.div

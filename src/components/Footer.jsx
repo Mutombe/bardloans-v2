@@ -25,7 +25,7 @@ const contact = [
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-dark text-white relative overflow-hidden">
+    <footer className="bg-black text-white relative overflow-hidden">
       <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 relative">
