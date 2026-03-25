@@ -6,6 +6,7 @@ import Offerings from './components/Offerings'
 import HowItWorks from './components/HowItWorks'
 import Requirements from './components/Requirements'
 import DetailedCalculator from './components/DetailedCalculator'
+import ApplicationForm from './components/ApplicationForm'
 import FAQ from './components/FAQ'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
@@ -22,6 +23,7 @@ function App() {
       <HowItWorks />
       <Requirements />
       <DetailedCalculator />
+      <ApplicationForm />
       <FAQ />
       <CTA />
       <Footer />

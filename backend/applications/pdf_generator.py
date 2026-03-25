@@ -1,0 +1,123 @@
+import io
+import base64
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import mm
+from reportlab.lib.colors import HexColor
+from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
+
+
+NAVY = HexColor('#1B1464')
+ORANGE = HexColor('#E8891D')
+GRAY = HexColor('#666666')
+LIGHT = HexColor('#F5F5F4')
+
+
+def draw_section_header(c, y, title):
+    c.setFillColor(NAVY)
+    c.rect(20 * mm, y - 1 * mm, 170 * mm, 7 * mm, fill=True, stroke=False)
+    c.setFillColor(HexColor('#FFFFFF'))
+    c.setFont('Helvetica-Bold', 10)
+    c.drawString(25 * mm, y + 1 * mm, title)
+    return y - 12 * mm
+
+
+def draw_field(c, y, label, value, x=25 * mm, width=75 * mm):
+    c.setFont('Helvetica', 7)
+    c.setFillColor(GRAY)
+    c.drawString(x, y + 3 * mm, label)
+    c.setFont('Helvetica-Bold', 9)
+    c.setFillColor(NAVY)
+    c.drawString(x, y - 2 * mm, str(value or '—'))
+    c.setStrokeColor(HexColor('#E0E0E0'))
+    c.line(x, y - 4 * mm, x + width, y - 4 * mm)
+    return y - 12 * mm
+
+
+def draw_field_row(c, y, fields):
+    """Draw a row of (label, value) pairs across the page."""
+    col_width = 80 * mm
+    for i, (label, value) in enumerate(fields):
+        x = 25 * mm + i * col_width
+        draw_field(c, y, label, value, x=x, width=70 * mm)
+    return y - 12 * mm
+
+
+def generate_application_pdf(app):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=A4)
+    w, h = A4
+
+    # Header
+    c.setFillColor(NAVY)
+    c.rect(0, h - 25 * mm, w, 25 * mm, fill=True, stroke=False)
+    c.setFillColor(ORANGE)
+    c.rect(0, h - 27 * mm, w, 2 * mm, fill=True, stroke=False)
+    c.setFillColor(HexColor('#FFFFFF'))
+    c.setFont('Helvetica-Bold', 16)
+    c.drawString(25 * mm, h - 17 * mm, 'BARD SANTNER INVESTORS SA')
+    c.setFont('Helvetica', 9)
+    c.drawString(130 * mm, h - 12 * mm, 'LOAN APPLICATION FORM')
+    c.drawString(130 * mm, h - 17 * mm, f'Date: {app.application_date}')
+
+    y = h - 40 * mm
+
+    # Personal Details
+    y = draw_section_header(c, y, 'PERSONAL DETAILS')
+    y = draw_field_row(c, y, [('Surname', app.surname), ('First Name', app.first_name)])
+    y = draw_field_row(c, y, [('ID Number', app.id_number), ('Date of Birth', app.date_of_birth)])
+    y = draw_field_row(c, y, [('Marital Status', app.marital_status), ('Gender', app.gender)])
+    y = draw_field(c, y, 'Residential Address', app.residential_address, width=160 * mm)
+    y = draw_field(c, y, 'Email Address', app.email_address, width=160 * mm)
+    y = draw_field_row(c, y, [('Contact Number', app.contact_number), ('Alternative Number', app.alternative_number)])
+    y = draw_field_row(c, y, [('Next of Kin', app.next_of_kin), ('Relationship', app.relationship)])
+
+    # Employment Details
+    y = draw_section_header(c, y, 'EMPLOYMENT DETAILS')
+    y = draw_field_row(c, y, [('Name of Employer', app.employer_name), ('Position Held', app.position_held)])
+    y = draw_field_row(c, y, [('Contract Type', app.contract_type), ('Employee Number', app.employee_number)])
+    y = draw_field_row(c, y, [('Employment Date', app.employment_date), ('Contract Expiry', app.contract_expiry_date)])
+    y = draw_field_row(c, y, [('Supervisor', app.supervisor_name), ('Supervisor Contact', app.supervisor_contact)])
+
+    # Banking Details
+    y = draw_section_header(c, y, 'BANKING DETAILS')
+    y = draw_field_row(c, y, [('Bank Name', app.bank_name), ('Branch', app.branch)])
+    y = draw_field_row(c, y, [('Account Number', app.account_number), ('Account Name', app.account_name)])
+
+    # Loan Details
+    y = draw_section_header(c, y, 'LOAN APPLICATION DETAILS')
+    y = draw_field_row(c, y, [('Loan Amount', f'R{app.loan_amount}'), ('Loan Installment', f'R{app.loan_installment or "—"}')])
+    y = draw_field_row(c, y, [('Repayment Period', f'{app.repayment_period} month(s)'), ('Loan Purpose', app.loan_purpose)])
+
+    # Signature
+    y -= 5 * mm
+    if y < 80 * mm:
+        c.showPage()
+        y = h - 30 * mm
+
+    y = draw_section_header(c, y, 'APPLICANT SIGNATURE')
+
+    if app.signature_image and app.signature_image.startswith('data:'):
+        try:
+            sig_data = app.signature_image.split(',')[1]
+            sig_bytes = base64.b64decode(sig_data)
+            sig_img = ImageReader(io.BytesIO(sig_bytes))
+            c.drawImage(sig_img, 25 * mm, y - 25 * mm, width=60 * mm, height=20 * mm, preserveAspectRatio=True)
+        except Exception:
+            c.setFont('Helvetica', 9)
+            c.drawString(25 * mm, y - 5 * mm, '[Signature captured digitally]')
+
+    c.setFont('Helvetica', 8)
+    c.setFillColor(GRAY)
+    c.drawString(100 * mm, y - 5 * mm, f'Date: {app.application_date}')
+    c.drawString(100 * mm, y - 12 * mm, f'Applicant: {app.first_name} {app.surname}')
+
+    # Footer
+    c.setFont('Helvetica', 6)
+    c.setFillColor(GRAY)
+    c.drawString(25 * mm, 15 * mm, 'Bard Santner Investors SA — Authorised Financial Services Provider — Registered Credit Provider NCRCP12840')
+    c.drawString(25 * mm, 10 * mm, '2nd Floor Bowmans Building, 11 Alice Lane, Sandton, 2196 | apply@bardloans.co.za | 067 615 1569')
+
+    c.save()
+    buf.seek(0)
+    return buf

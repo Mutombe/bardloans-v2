@@ -8,7 +8,7 @@ const faqs = [
   { icon: Percent, question: 'What are the fees?', answer: '5% interest per month, 5% initiation fee (once-off), 10% service fee per month. All shown upfront in our calculator.' },
   { icon: CalendarCheck, question: 'How long to repay?', answer: '1, 2, or 3 months. Shorter terms = less total interest.' },
   { icon: Lightning, question: 'How fast is approval?', answer: 'Same day! Funds can be in your account within hours.' },
-  { icon: IdentificationCard, question: 'What documents do I need?', answer: 'SA ID, payslip, proof of address, application form, and signed loan agreement.' },
+  { icon: IdentificationCard, question: 'What documents do I need?', answer: 'Just two things: your SA ID document and proof of employment (payslip or bank statement). That\'s it.' },
   { icon: Car, question: 'What is collateral lending?', answer: 'Use your vehicles or machinery as security for larger loan amounts and better terms.' },
   { icon: ShieldCheck, question: 'Are you registered?', answer: 'Yes. Bard Santner Investors — authorised FSP and registered credit provider NCRCP12840.' },
 ]

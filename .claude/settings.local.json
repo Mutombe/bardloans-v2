@@ -20,7 +20,8 @@
       "Bash(python:*)",
       "Bash(ls -la /c/Users/PC/documents/bardloans-v2/*.png /c/Users/PC/documents/bardloans-v2/*.jpg /c/Users/PC/documents/bardloans-v2/*.jpeg)",
       "WebFetch(domain:sheshisafin.co.za)",
-      "Bash(grep -rn \"bg-white\" /c/Users/PC/documents/bardloans-v2/src/components/*.jsx)"
+      "Bash(grep -rn \"bg-white\" /c/Users/PC/documents/bardloans-v2/src/components/*.jsx)",
+      "Bash(ls:*)"
     ]
   }
 }
