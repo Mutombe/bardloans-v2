@@ -243,7 +243,7 @@ export default function ApplicationForm() {
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} className="mt-1 w-5 h-5 rounded border-gray-300 text-primary accent-primary cursor-pointer" />
                   <span className="text-sm text-gray-600">
-                    I hereby give explicit, informed, and voluntary consent for Bard Santner Investors to collect, process, and store my personal data for the purposes stated above.
+                    I confirm that the information submitted belongs to me, the applicant, and I hereby give explicit, informed, and voluntary consent to Bard Santner Investors to collect, process, and store my personal data for the purposes stated above.
                   </span>
                 </label>
               </motion.div>
