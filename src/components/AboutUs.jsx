@@ -15,6 +15,60 @@ export default function AboutUs() {
 
   return (
     <section id="about" className="py-20 sm:py-28 bg-white relative overflow-hidden">
+      {/* Lightweight stone texture — SVG without heavy filters */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <svg width="100%" height="100%" viewBox="0 0 1400 900" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="s1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#f0f0f0" /><stop offset="100%" stopColor="#d8d8d8" />
+            </linearGradient>
+            <linearGradient id="s2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#eaeaea" /><stop offset="100%" stopColor="#d0d0d0" />
+            </linearGradient>
+            <linearGradient id="s3" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stopColor="#f5f5f5" /><stop offset="100%" stopColor="#dcdcdc" />
+            </linearGradient>
+          </defs>
+          {/* Base layer */}
+          <ellipse cx="180" cy="780" rx="140" ry="85" fill="url(#s1)" opacity="0.5" transform="rotate(-5 180 780)" />
+          <ellipse cx="450" cy="800" rx="170" ry="95" fill="url(#s2)" opacity="0.45" transform="rotate(6 450 800)" />
+          <ellipse cx="750" cy="790" rx="190" ry="90" fill="url(#s3)" opacity="0.5" transform="rotate(-3 750 790)" />
+          <ellipse cx="1050" cy="800" rx="160" ry="100" fill="url(#s1)" opacity="0.45" transform="rotate(10 1050 800)" />
+          {/* Second layer */}
+          <ellipse cx="120" cy="660" rx="120" ry="70" fill="url(#s2)" opacity="0.4" transform="rotate(12 120 660)" />
+          <ellipse cx="350" cy="680" rx="130" ry="75" fill="url(#s3)" opacity="0.45" transform="rotate(-8 350 680)" />
+          <ellipse cx="600" cy="670" rx="150" ry="80" fill="url(#s1)" opacity="0.4" transform="rotate(5 600 670)" />
+          <ellipse cx="870" cy="685" rx="125" ry="72" fill="url(#s2)" opacity="0.45" transform="rotate(-15 870 685)" />
+          <ellipse cx="1150" cy="670" rx="135" ry="68" fill="url(#s3)" opacity="0.4" transform="rotate(8 1150 670)" />
+          {/* Third layer */}
+          <ellipse cx="200" cy="550" rx="100" ry="60" fill="url(#s3)" opacity="0.35" transform="rotate(20 200 550)" />
+          <ellipse cx="450" cy="565" rx="110" ry="55" fill="url(#s1)" opacity="0.4" transform="rotate(-12 450 565)" />
+          <ellipse cx="700" cy="555" rx="105" ry="62" fill="url(#s2)" opacity="0.35" transform="rotate(15 700 555)" />
+          <ellipse cx="950" cy="570" rx="100" ry="58" fill="url(#s3)" opacity="0.4" transform="rotate(-18 950 570)" />
+          <ellipse cx="1200" cy="555" rx="95" ry="55" fill="url(#s1)" opacity="0.35" transform="rotate(10 1200 555)" />
+          {/* Fourth layer */}
+          <ellipse cx="150" cy="440" rx="80" ry="50" fill="url(#s1)" opacity="0.3" transform="rotate(25 150 440)" />
+          <ellipse cx="380" cy="455" rx="90" ry="48" fill="url(#s2)" opacity="0.35" transform="rotate(-20 380 455)" />
+          <ellipse cx="600" cy="445" rx="85" ry="52" fill="url(#s3)" opacity="0.3" transform="rotate(14 600 445)" />
+          <ellipse cx="830" cy="460" rx="88" ry="46" fill="url(#s1)" opacity="0.35" transform="rotate(-22 830 460)" />
+          <ellipse cx="1060" cy="450" rx="82" ry="50" fill="url(#s2)" opacity="0.3" transform="rotate(18 1060 450)" />
+          <ellipse cx="1280" cy="440" rx="78" ry="48" fill="url(#s3)" opacity="0.35" transform="rotate(-12 1280 440)" />
+          {/* Upper stones */}
+          <ellipse cx="250" cy="340" rx="65" ry="40" fill="url(#s2)" opacity="0.25" transform="rotate(30 250 340)" />
+          <ellipse cx="500" cy="350" rx="70" ry="38" fill="url(#s3)" opacity="0.3" transform="rotate(-25 500 350)" />
+          <ellipse cx="750" cy="345" rx="68" ry="42" fill="url(#s1)" opacity="0.25" transform="rotate(22 750 345)" />
+          <ellipse cx="1000" cy="355" rx="65" ry="36" fill="url(#s2)" opacity="0.3" transform="rotate(-28 1000 355)" />
+          {/* Top layer */}
+          <ellipse cx="350" cy="250" rx="55" ry="32" fill="url(#s1)" opacity="0.2" transform="rotate(35 350 250)" />
+          <ellipse cx="650" cy="240" rx="50" ry="30" fill="url(#s3)" opacity="0.25" transform="rotate(-30 650 240)" />
+          <ellipse cx="950" cy="250" rx="52" ry="34" fill="url(#s2)" opacity="0.2" transform="rotate(28 950 250)" />
+          {/* Peak */}
+          <ellipse cx="500" cy="160" rx="40" ry="25" fill="url(#s2)" opacity="0.18" transform="rotate(40 500 160)" />
+          <ellipse cx="800" cy="155" rx="38" ry="22" fill="url(#s1)" opacity="0.15" transform="rotate(-35 800 155)" />
+        </svg>
+      </div>
+
+      {/* Triangles */}
       {[
         { x: '90%', y: '10%', r: 20, o: 0.06, c: '#E8891D' },
         { x: '3%', y: '55%', r: -40, o: 0.05, c: '#14B8A6' },

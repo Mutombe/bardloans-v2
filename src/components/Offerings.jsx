@@ -48,13 +48,13 @@ export default function Offerings() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="bg-warm-white rounded-2xl p-5 sm:p-6 border-2 border-transparent hover:border-primary transition-all duration-300 hover:-translate-y-1 block group text-center"
+              className="bg-navy-dark rounded-2xl p-5 sm:p-6 border-2 border-navy-dark hover:border-primary transition-all duration-300 hover:-translate-y-1 block group text-center"
             >
-              <div className="w-16 h-16 rounded-full bg-gray-200 group-hover:bg-primary flex items-center justify-center mb-4 mx-auto transition-all duration-300">
+              <div className="w-16 h-16 rounded-full bg-white/10 group-hover:bg-primary flex items-center justify-center mb-4 mx-auto transition-all duration-300">
                 <offering.icon size={32} weight="bold" className="text-primary group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-base sm:text-lg font-extrabold text-navy mb-1 uppercase">{offering.title}</h3>
-              <p className="text-gray-400 text-sm">{offering.description}</p>
+              <h3 className="text-base sm:text-lg font-extrabold text-white mb-1 uppercase">{offering.title}</h3>
+              <p className="text-white/40 text-sm">{offering.description}</p>
             </motion.a>
           ))}
         </div>

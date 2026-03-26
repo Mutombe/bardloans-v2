@@ -34,7 +34,7 @@ export default function Features() {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 uppercase tracking-tight">
             Why{' '}
             <span className="relative inline-block">
-              <span className="relative z-10 px-3 text-primary">Bard?</span>
+              <span className="relative z-10 px-3 text-primary">Bard Loans?</span>
               <span className="absolute inset-0 bg-navy-dark rounded-md skew-x-[-2deg]" />
             </span>
           </h2>
