@@ -3,13 +3,13 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { CaretDown, CurrencyCircleDollar, ListBullets, Percent, CalendarCheck, Lightning, IdentificationCard, Car, ShieldCheck, WhatsappLogo, ArrowRight } from '@phosphor-icons/react'
 
 const faqs = [
-  { icon: CurrencyCircleDollar, question: 'How much can I borrow?', answer: 'Between R500 and R5,000 based on your salary and affordability.' },
+  { icon: CurrencyCircleDollar, question: 'How much can I borrow?', answer: 'Up to R350,000 depending on the loan type. Quick loans up to R5,000, salary-based up to R50,000, personal/collateral/product-based up to R100,000.' },
   { icon: ListBullets, question: 'What loans do you offer?', answer: 'Personal, Short Term, Salary Based, Quick Loans, Send Now Pay Later, Collateral Based (vehicles/machinery), and Product Based (solar, boreholes, groceries, stands).' },
   { icon: Percent, question: 'What are the fees?', answer: '5% interest per month, 5% initiation fee (once-off), 10% service fee per month. All shown upfront in our calculator.' },
-  { icon: CalendarCheck, question: 'How long to repay?', answer: '1, 2, or 3 months. Shorter terms = less total interest.' },
+  { icon: CalendarCheck, question: 'How long to repay?', answer: 'Up to 6 months depending on the loan. Shorter terms = less total interest.' },
   { icon: Lightning, question: 'How fast is approval?', answer: 'Same day! Funds can be in your account within hours.' },
-  { icon: IdentificationCard, question: 'What documents do I need?', answer: 'Just two things: your SA ID document and proof of employment (payslip or bank statement). That\'s it.' },
-  { icon: Car, question: 'What is collateral lending?', answer: 'Use your vehicles or machinery as security for larger loan amounts and better terms.' },
+  { icon: IdentificationCard, question: 'What documents do I need?', answer: 'Three things: your SA ID document, a valid passport, and proof of income. That\'s it.' },
+  { icon: Car, question: 'What is collateral lending?', answer: 'Use your vehicles or machinery as security for loans up to R100,000 with better terms.' },
   { icon: ShieldCheck, question: 'Are you registered?', answer: 'Yes. Bard Santner Investors — authorised FSP and registered credit provider NCRCP12840.' },
 ]
 

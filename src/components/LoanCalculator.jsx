@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { CalendarBlank, ArrowRight, Info, WhatsappLogo, EnvelopeSimple } from '@phosphor-icons/react'
+import { CalendarBlank, ArrowRight, Info, WhatsappLogo, FileText } from '@phosphor-icons/react'
 
 function buildWhatsAppUrl(amount, months, calc) {
   const msg = `Hi Bard Loans,%0A%0AI'd like to apply for a loan.%0A%0A*Loan Amount:* R${amount.toLocaleString()}%0A*Repayment Period:* ${months} month${months > 1 ? 's' : ''}%0A*Total Repayable:* R${calc.total.toFixed(2)}%0A*Monthly Instalment:* R${calc.monthly.toFixed(2)}%0A%0APlease assist me with the application process.`
@@ -13,9 +13,12 @@ function buildEmailUrl(amount, months, calc) {
   return `mailto:apply@bardloans.co.za?subject=${subject}&body=${body}`
 }
 
-export default function LoanCalculator({ compact = false }) {
-  const [amount, setAmount] = useState(2000)
+export default function LoanCalculator({ compact = false, maxAmount = 350000 }) {
+  const [amount, setAmount] = useState(maxAmount <= 5000 ? 2000 : 10000)
   const [months, setMonths] = useState(1)
+
+  const maxMonths = 6
+  const step = maxAmount <= 5000 ? 100 : maxAmount <= 50000 ? 500 : 1000
 
   const calc = useMemo(() => {
     const interest = amount * 0.05 * months
@@ -26,8 +29,9 @@ export default function LoanCalculator({ compact = false }) {
     return { interest, initiation, serviceFee, total, monthly }
   }, [amount, months])
 
-  const progress = ((amount - 500) / 4500) * 100
+  const progress = ((amount - 500) / (maxAmount - 500)) * 100
   const fmt = (n) => `R${n.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+  const fmtShort = (n) => n >= 1000 ? `R${(n / 1000).toLocaleString()}K` : `R${n.toLocaleString()}`
 
   const wrapperClass = compact
     ? 'bg-white/[0.07] backdrop-blur-xl border border-white/[0.12] rounded-2xl p-5 sm:p-6 w-full max-w-sm shadow-2xl shadow-black/20'
@@ -57,17 +61,17 @@ export default function LoanCalculator({ compact = false }) {
 
       {/* Amount */}
       <motion.div key={amount} initial={{ scale: 0.97 }} animate={{ scale: 1 }} className="text-center mb-1">
-        <span className={`${compact ? 'text-4xl' : 'text-5xl sm:text-6xl'} font-extrabold ${textMain} tracking-tight`}>
+        <span className={`${compact ? 'text-3xl sm:text-4xl' : 'text-4xl sm:text-5xl'} font-extrabold ${textMain} tracking-tight`}>
           R{amount.toLocaleString()}
         </span>
       </motion.div>
 
       {/* Slider */}
       <div className="mb-5">
-        <input type="range" min="500" max="5000" step="100" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full" style={{ '--progress': `${progress}%` }} />
+        <input type="range" min="500" max={maxAmount} step={step} value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full" style={{ '--progress': `${progress}%` }} />
         <div className={`flex justify-between text-[10px] ${textFaint} mt-0.5 font-medium`}>
           <span>R500</span>
-          <span>R5,000</span>
+          <span>{fmtShort(maxAmount)}</span>
         </div>
       </div>
 
@@ -77,18 +81,18 @@ export default function LoanCalculator({ compact = false }) {
           <CalendarBlank size={16} weight="bold" className="text-mint" />
           Repayment period
         </label>
-        <div className="grid grid-cols-3 gap-1.5">
-          {[1, 2, 3].map((m) => (
+        <div className={`grid ${compact ? 'grid-cols-3' : 'grid-cols-3 sm:grid-cols-6'} gap-1.5`}>
+          {Array.from({ length: maxMonths }, (_, i) => i + 1).map((m) => (
             <motion.button
               key={m}
               onClick={() => setMonths(m)}
-              className={`py-2.5 ${compact ? '' : 'sm:py-3'} rounded-lg text-sm font-bold transition-all duration-300 cursor-pointer ${
+              className={`py-2 ${compact ? '' : 'sm:py-2.5'} rounded-lg text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                 months === m ? 'bg-mint text-white shadow-md shadow-mint/20' : btnInactiveBg
               }`}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              {m} {m === 1 ? 'month' : 'months'}
+              {m} {m === 1 ? 'mo' : 'mo'}
             </motion.button>
           ))}
         </div>
@@ -144,14 +148,22 @@ export default function LoanCalculator({ compact = false }) {
           WhatsApp
         </motion.a>
         <motion.a
-          href={buildEmailUrl(amount, months, calc)}
+          href={`?loanAmount=${amount}&months=${months}#apply-form`}
+          onClick={(e) => {
+            e.preventDefault()
+            const params = new URLSearchParams(window.location.search)
+            params.set('loanAmount', amount)
+            params.set('months', months)
+            window.history.replaceState({}, '', `?${params.toString()}`)
+            document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })
+          }}
           className={`flex items-center justify-center gap-1.5 bg-gradient-to-r from-primary to-primary-dark hover:from-primary-dark hover:to-primary text-white ${compact ? 'py-2.5 text-xs' : 'py-3 text-sm'} rounded-xl font-bold shadow-md shadow-primary/20 transition-all cursor-pointer overflow-hidden group relative`}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
           <span className="relative z-10 flex items-center gap-1.5">
-            <EnvelopeSimple size={compact ? 16 : 18} weight="bold" />
-            Email
+            <FileText size={compact ? 16 : 18} weight="bold" />
+            Apply
           </span>
           <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         </motion.a>

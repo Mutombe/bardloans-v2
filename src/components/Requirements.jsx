@@ -1,10 +1,11 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { IdentificationCard, Money, CheckCircle } from '@phosphor-icons/react'
+import { IdentificationCard, Globe, Money, CheckCircle } from '@phosphor-icons/react'
 
 const requirements = [
-  { icon: IdentificationCard, title: 'ID Document', desc: 'Valid South African ID or smart card' },
-  { icon: Money, title: 'Proof of Employment', desc: 'Payslip or bank statement' },
+  { icon: IdentificationCard, title: 'SA ID Document' },
+  { icon: Globe, title: 'Valid Passport' },
+  { icon: Money, title: 'Proof of Income' },
 ]
 
 export default function Requirements() {
@@ -22,10 +23,10 @@ export default function Requirements() {
               <span className="absolute inset-0 bg-primary rounded-md skew-x-[-2deg]" />
             </span>
           </h2>
-          <p className="text-gray-500 max-w-lg mx-auto text-lg">Just two documents. That&apos;s it.</p>
+          <p className="text-gray-500 max-w-lg mx-auto text-lg">Just three documents. That&apos;s it.</p>
         </motion.div>
 
-        <div className="max-w-2xl mx-auto grid sm:grid-cols-2 gap-5">
+        <div className="max-w-3xl mx-auto grid sm:grid-cols-3 gap-5">
           {requirements.map((req, index) => (
             <motion.div
               key={req.title}
@@ -41,9 +42,8 @@ export default function Requirements() {
                 <span className="w-8 h-8 rounded-full bg-primary text-white text-sm font-extrabold flex items-center justify-center">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <h4 className="font-extrabold text-navy text-xl uppercase">{req.title}</h4>
+                <h4 className="font-extrabold text-navy text-lg uppercase">{req.title}</h4>
               </div>
-              <p className="text-gray-500 text-base">{req.desc}</p>
               <CheckCircle size={28} weight="fill" className="text-mint mx-auto mt-4" />
             </motion.div>
           ))}

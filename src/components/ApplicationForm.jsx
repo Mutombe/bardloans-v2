@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { User, Briefcase, Bank, FileText, ArrowRight, ArrowLeft, PaperPlaneTilt, CheckCircle, CloudArrowUp, WarningCircle } from '@phosphor-icons/react'
+import { User, Briefcase, Bank, FileText, ArrowRight, ArrowLeft, PaperPlaneTilt, CheckCircle, CloudArrowUp, WarningCircle, Info } from '@phosphor-icons/react'
 import SignaturePad from './SignaturePad'
 
 const STEPS = [
@@ -12,6 +12,33 @@ const STEPS = [
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
+function LoanBreakdown({ amount, months }) {
+  const a = Number(amount) || 0
+  const m = Number(months) || 1
+  if (a <= 0) return null
+  const interest = a * 0.05 * m
+  const initiation = a * 0.05
+  const serviceFee = a * 0.10 * m
+  const total = a + interest + initiation + serviceFee
+  const monthly = total / m
+  const fmt = (n) => `R${n.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+
+  return (
+    <div className="bg-gradient-to-br from-navy-50/60 to-mint-50/40 rounded-xl p-4 space-y-1.5">
+      <h4 className="text-navy font-extrabold text-sm uppercase mb-2 flex items-center gap-1.5">
+        <Info size={14} className="text-mint" /> Your Loan Breakdown
+      </h4>
+      <div className="flex justify-between text-xs"><span className="text-gray-400">Interest (5%/mo)</span><span className="font-semibold text-navy">{fmt(interest)}</span></div>
+      <div className="flex justify-between text-xs"><span className="text-gray-400">Initiation (5%)</span><span className="font-semibold text-navy">{fmt(initiation)}</span></div>
+      <div className="flex justify-between text-xs"><span className="text-gray-400">Service fee (10%/mo)</span><span className="font-semibold text-navy">{fmt(serviceFee)}</span></div>
+      <div className="border-t border-gray-200/60 pt-1.5 mt-1.5">
+        <div className="flex justify-between text-sm"><span className="text-gray-500 font-medium">Total Repayable</span><span className="font-extrabold text-navy">{fmt(total)}</span></div>
+        {m > 1 && <div className="flex justify-between text-sm mt-0.5"><span className="text-gray-400">Monthly Instalment</span><span className="font-extrabold text-mint-dark">{fmt(monthly)}</span></div>}
+      </div>
+    </div>
+  )
+}
+
 export default function ApplicationForm() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
@@ -19,6 +46,7 @@ export default function ApplicationForm() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(null)
+  const [prefilled, setPrefilled] = useState(false)
 
   const [form, setForm] = useState({
     surname: '', firstName: '', idNumber: '', dateOfBirth: '',
@@ -33,6 +61,33 @@ export default function ApplicationForm() {
   const [proofFile, setProofFile] = useState(null)
   const [signature, setSignature] = useState(null)
   const [consent, setConsent] = useState(false)
+
+  // Read URL params from calculator
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const loanAmount = params.get('loanAmount')
+    const months = params.get('months')
+    if (loanAmount && months) {
+      setForm(prev => ({
+        ...prev,
+        loanAmount,
+        repaymentPeriod: months,
+      }))
+      setPrefilled(true)
+      // Clean URL
+      window.history.replaceState({}, '', window.location.pathname + window.location.hash)
+    }
+  }, [])
+
+  // Auto-calculate installment when amount/period change
+  useEffect(() => {
+    const a = Number(form.loanAmount) || 0
+    const m = Number(form.repaymentPeriod) || 1
+    if (a > 0) {
+      const total = a * (1.05 + 0.15 * m)
+      update('loanInstallment', (total / m).toFixed(2))
+    }
+  }, [form.loanAmount, form.repaymentPeriod])
 
   const update = (field, value) => setForm(prev => ({ ...prev, [field]: value }))
 
@@ -77,7 +132,7 @@ export default function ApplicationForm() {
           </div>
           <h2 className="text-4xl font-extrabold text-navy mb-4 uppercase">Application Submitted!</h2>
           <p className="text-gray-500 text-lg mb-8">
-            Your loan application has been received. We&apos;ll review it and get back to you within 24 hours. Check your email for a confirmation.
+            Your loan application has been received. We&apos;ll review it and get back to you within 24 hours.
           </p>
           <a href="#home" className="inline-flex items-center gap-2 bg-primary text-white font-extrabold text-sm px-8 py-3.5 rounded-full uppercase tracking-wide hover:scale-105 transition-transform">
             Back to Home
@@ -98,7 +153,9 @@ export default function ApplicationForm() {
               <span className="absolute inset-0 bg-primary rounded-md skew-x-[-2deg]" />
             </span>
           </h2>
-          <p className="text-gray-500 text-lg">Fill in the form below. It takes less than 5 minutes.</p>
+          <p className="text-gray-500 text-lg">
+            {prefilled ? 'Your loan details are pre-filled from the calculator. Complete your details below.' : 'Fill in the form below. It takes less than 5 minutes.'}
+          </p>
         </motion.div>
 
         {/* Step indicator */}
@@ -193,15 +250,24 @@ export default function ApplicationForm() {
                 </div>
                 <h4 className="text-lg font-extrabold text-navy uppercase pt-4">Loan Details</h4>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <div><label className={labelClass}>Loan Amount (R) *</label><input type="number" className={inputClass} value={form.loanAmount} onChange={e => update('loanAmount', e.target.value)} placeholder="500 - 5000" /></div>
+                  <div><label className={labelClass}>Loan Amount (R) *</label><input type="number" className={inputClass} value={form.loanAmount} onChange={e => update('loanAmount', e.target.value)} placeholder="500 - 350,000" /></div>
                   <div><label className={labelClass}>Repayment Period</label>
                     <select className={inputClass} value={form.repaymentPeriod} onChange={e => update('repaymentPeriod', e.target.value)}>
-                      <option value="1">1 Month</option><option value="2">2 Months</option><option value="3">3 Months</option>
+                      <option value="1">1 Month</option><option value="2">2 Months</option><option value="3">3 Months</option><option value="4">4 Months</option><option value="5">5 Months</option><option value="6">6 Months</option>
                     </select>
                   </div>
-                  <div><label className={labelClass}>Loan Installment (R)</label><input type="number" className={inputClass} value={form.loanInstallment} onChange={e => update('loanInstallment', e.target.value)} /></div>
-                  <div><label className={labelClass}>Loan Purpose</label><input className={inputClass} value={form.loanPurpose} onChange={e => update('loanPurpose', e.target.value)} placeholder="e.g. Medical, Education, Emergency" /></div>
+                  <div className="sm:col-span-2"><label className={labelClass}>Loan Purpose</label><input className={inputClass} value={form.loanPurpose} onChange={e => update('loanPurpose', e.target.value)} placeholder="e.g. Medical, Education, Emergency" /></div>
                 </div>
+
+                {/* Live calculation breakdown */}
+                {form.loanAmount && <LoanBreakdown amount={form.loanAmount} months={form.repaymentPeriod} />}
+
+                {prefilled && (
+                  <div className="bg-mint-50 border border-mint/20 rounded-xl p-3 flex items-center gap-2 text-mint-dark text-sm">
+                    <CheckCircle size={18} weight="fill" />
+                    Loan details pre-filled from calculator. Adjust if needed.
+                  </div>
+                )}
               </motion.div>
             )}
 
@@ -220,7 +286,7 @@ export default function ApplicationForm() {
                     </label>
                   </div>
                   <div>
-                    <label className={labelClass}>Proof of Employment *</label>
+                    <label className={labelClass}>Proof of Income *</label>
                     <label className={`flex flex-col items-center gap-2 p-6 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${proofFile ? 'border-mint bg-mint/5' : 'border-gray-200 hover:border-primary bg-gray-50'}`}>
                       {proofFile ? <CheckCircle size={32} weight="fill" className="text-mint" /> : <CloudArrowUp size={32} className="text-gray-400" />}
                       <span className="text-sm font-bold text-navy">{proofFile ? proofFile.name : 'Upload Payslip / Bank Statement'}</span>
@@ -250,7 +316,6 @@ export default function ApplicationForm() {
             )}
           </AnimatePresence>
 
-          {/* Error */}
           {error && (
             <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm">
               <WarningCircle size={18} weight="bold" />

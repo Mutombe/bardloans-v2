@@ -3,14 +3,14 @@ import { useRef } from 'react'
 import { User, Timer, Wallet, Lightning, PaperPlaneTilt, Car, SolarPanel, Package } from '@phosphor-icons/react'
 
 const offerings = [
-  { icon: User, title: 'Personal Loans', description: 'Tailored to your needs.' },
-  { icon: Timer, title: 'Short Term', description: '1 to 3 months terms.' },
-  { icon: Wallet, title: 'Salary Based', description: 'Based on your income.' },
-  { icon: Lightning, title: 'Quick Loans', description: 'Same-day cash.' },
+  { icon: User, title: 'Personal Loans', description: 'Up to R100,000. Tailored to you.' },
+  { icon: Timer, title: 'Short Term', description: 'Up to 6 months repayment.' },
+  { icon: Wallet, title: 'Salary Based', description: 'Up to R50,000 based on income.' },
+  { icon: Lightning, title: 'Quick Loans', description: 'Up to R5,000. Same-day cash.' },
   { icon: PaperPlaneTilt, title: 'Pay Later', description: 'Get now, pay monthly.' },
-  { icon: Car, title: 'Collateral', description: 'Use assets as security.' },
-  { icon: SolarPanel, title: 'Solar & Borehole', description: 'Finance installations.' },
-  { icon: Package, title: 'Grocery & Stands', description: 'Everyday financing.' },
+  { icon: Car, title: 'Collateral', description: 'Up to R100,000 with assets.' },
+  { icon: SolarPanel, title: 'Solar & Borehole', description: 'Up to R100,000 for installations.' },
+  { icon: Package, title: 'Grocery & Stands', description: 'Up to R100,000 for essentials.' },
 ]
 
 export default function Offerings() {
@@ -37,7 +37,7 @@ export default function Offerings() {
               <span className="absolute inset-0 bg-navy rounded-md skew-x-[-2deg]" />
             </span>
           </h2>
-          <p className="text-gray-500 max-w-lg mx-auto text-lg">A solution for every need.</p>
+          <p className="text-gray-500 max-w-lg mx-auto text-lg">Loans up to R350,000. A solution for every need.</p>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">

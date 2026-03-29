@@ -5,7 +5,7 @@ import LoanCalculator from './LoanCalculator'
 import BrandPattern from './BrandPattern'
 
 const highlights = [
-  { icon: CurrencyCircleDollar, text: 'R500 – R5,000 range' },
+  { icon: CurrencyCircleDollar, text: 'R500 – R350,000 range' },
   { icon: Clock, text: 'Same-day approval' },
   { icon: ShieldCheck, text: 'NCR registered' },
 ]
