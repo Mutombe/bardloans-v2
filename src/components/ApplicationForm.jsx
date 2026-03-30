@@ -182,7 +182,7 @@ export default function ApplicationForm() {
         </div>
 
         {/* Form steps */}
-        <div className="bg-white rounded-2xl border-2 border-gray-100 p-6 sm:p-8">
+        <div className="bg-white rounded-2xl border-2 border-navy/20 shadow-lg shadow-navy/5 p-6 sm:p-8">
           <AnimatePresence mode="wait">
             {step === 0 && (
               <motion.div key="step0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
