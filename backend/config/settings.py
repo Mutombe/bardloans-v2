@@ -52,8 +52,8 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'apply@bardloans.co.za')
 
-# Bard Loans recipient email
-LOAN_APPLICATION_EMAIL = os.environ.get('LOAN_APPLICATION_EMAIL', 'apply@bardloans.co.za')
+# Bard Loans recipient emails (comma-separated)
+LOAN_APPLICATION_EMAILS = os.environ.get('LOAN_APPLICATION_EMAILS', 'apply@bardloans.co.za,simbamtombe@gmail.com').split(',')
 
 # Security in production
 if not DEBUG:

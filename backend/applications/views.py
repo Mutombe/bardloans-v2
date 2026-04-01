@@ -88,7 +88,7 @@ def apply_for_loan(request):
             subject=subject,
             body=body,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[settings.LOAN_APPLICATION_EMAIL],
+            to=settings.LOAN_APPLICATION_EMAILS,
         )
 
         # Attach the signed PDF
