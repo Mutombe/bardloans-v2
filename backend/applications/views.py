@@ -64,8 +64,8 @@ def apply_for_loan(request):
     app.proof_of_employment = proof
     app.save()
 
-    # Generate signed PDF
-    pdf_buf = generate_application_pdf(app)
+    # Generate signed PDF (with embedded document images if applicable)
+    pdf_buf = generate_application_pdf(app, id_document=id_doc, proof_of_employment=proof)
 
     # Send email with PDF + attachments
     try:
@@ -98,7 +98,9 @@ def apply_for_loan(request):
             'application/pdf'
         )
 
-        # Attach uploaded documents
+        # Attach uploaded documents (reset file pointers after PDF generation read them)
+        id_doc.seek(0)
+        proof.seek(0)
         email.attach(id_doc.name, id_doc.read(), id_doc.content_type)
         email.attach(proof.name, proof.read(), proof.content_type)
 

@@ -1,5 +1,6 @@
 import io
 import base64
+from PIL import Image
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.lib.colors import HexColor
@@ -11,6 +12,72 @@ NAVY = HexColor('#1B1464')
 ORANGE = HexColor('#E8891D')
 GRAY = HexColor('#666666')
 LIGHT = HexColor('#F5F5F4')
+
+
+def flatten_signature(sig_bytes):
+    """Flatten a transparent PNG signature onto a white background."""
+    img = Image.open(io.BytesIO(sig_bytes)).convert('RGBA')
+    white_bg = Image.new('RGBA', img.size, (255, 255, 255, 255))
+    composited = Image.alpha_composite(white_bg, img)
+    composited = composited.convert('RGB')
+    out = io.BytesIO()
+    composited.save(out, format='PNG')
+    out.seek(0)
+    return out
+
+
+def is_image_file(file_obj):
+    """Check if an uploaded file is an image (JPEG/PNG)."""
+    if not file_obj:
+        return False
+    ct = getattr(file_obj, 'content_type', '') or ''
+    name = getattr(file_obj, 'name', '') or ''
+    return ct.startswith('image/') or name.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'))
+
+
+def add_document_page(c, w, h, title, file_obj):
+    """Add a new PDF page with an embedded uploaded document image."""
+    c.showPage()
+    # Header bar
+    c.setFillColor(NAVY)
+    c.rect(0, h - 25 * mm, w, 25 * mm, fill=True, stroke=False)
+    c.setFillColor(ORANGE)
+    c.rect(0, h - 27 * mm, w, 2 * mm, fill=True, stroke=False)
+    c.setFillColor(HexColor('#FFFFFF'))
+    c.setFont('Helvetica-Bold', 14)
+    c.drawString(25 * mm, h - 17 * mm, title)
+
+    try:
+        file_obj.seek(0)
+        img_bytes = file_obj.read()
+        img = Image.open(io.BytesIO(img_bytes))
+        img_w, img_h = img.size
+
+        # Available area: page minus header and footer margins
+        max_w = w - 40 * mm
+        max_h = h - 60 * mm
+
+        # Scale to fit
+        scale = min(max_w / img_w, max_h / img_h, 1.0)
+        draw_w = img_w * scale
+        draw_h = img_h * scale
+
+        # Center horizontally, place below header
+        x = (w - draw_w) / 2
+        y = h - 35 * mm - draw_h
+
+        file_obj.seek(0)
+        img_reader = ImageReader(io.BytesIO(img_bytes))
+        c.drawImage(img_reader, x, y, width=draw_w, height=draw_h, preserveAspectRatio=True)
+    except Exception:
+        c.setFont('Helvetica', 10)
+        c.setFillColor(GRAY)
+        c.drawString(25 * mm, h - 45 * mm, f'[Document attached separately — could not embed: {file_obj.name}]')
+
+    # Footer
+    c.setFont('Helvetica', 6)
+    c.setFillColor(GRAY)
+    c.drawString(25 * mm, 10 * mm, 'Bard Santner Investors SA — Authorised Financial Services Provider — NCRCP12840')
 
 
 def draw_section_header(c, y, title):
@@ -43,7 +110,7 @@ def draw_field_row(c, y, fields):
     return y - 12 * mm
 
 
-def generate_application_pdf(app):
+def generate_application_pdf(app, id_document=None, proof_of_employment=None):
     buf = io.BytesIO()
     c = canvas.Canvas(buf, pagesize=A4)
     w, h = A4
@@ -101,7 +168,9 @@ def generate_application_pdf(app):
         try:
             sig_data = app.signature_image.split(',')[1]
             sig_bytes = base64.b64decode(sig_data)
-            sig_img = ImageReader(io.BytesIO(sig_bytes))
+            # Flatten transparent PNG onto white background so it doesn't render as black
+            sig_buf = flatten_signature(sig_bytes)
+            sig_img = ImageReader(sig_buf)
             c.drawImage(sig_img, 25 * mm, y - 25 * mm, width=60 * mm, height=20 * mm, preserveAspectRatio=True)
         except Exception:
             c.setFont('Helvetica', 9)
@@ -117,6 +186,13 @@ def generate_application_pdf(app):
     c.setFillColor(GRAY)
     c.drawString(25 * mm, 15 * mm, 'Bard Santner Investors SA — Authorised Financial Services Provider — Registered Credit Provider NCRCP12840')
     c.drawString(25 * mm, 10 * mm, '2nd Floor Bowmans Building, 11 Alice Lane, Sandton, 2196 | apply@bardloans.co.za | 067 615 1569')
+
+    # Embed uploaded documents as additional pages if they are images
+    if id_document and is_image_file(id_document):
+        add_document_page(c, w, h, 'ATTACHED: ID DOCUMENT', id_document)
+
+    if proof_of_employment and is_image_file(proof_of_employment):
+        add_document_page(c, w, h, 'ATTACHED: PROOF OF EMPLOYMENT', proof_of_employment)
 
     c.save()
     buf.seek(0)
