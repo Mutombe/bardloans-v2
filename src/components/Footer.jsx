@@ -23,7 +23,7 @@ const contact = [
   { icon: MapPin, text: '2nd Floor Bowmans Building, 11 Alice Lane, Sandton, 2196', href: '#' },
 ]
 
-export default function Footer() {
+export default function Footer({ onPrivacy, onTerms }) {
   return (
     <footer className="bg-black text-white relative overflow-hidden">
       <div className="h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
@@ -61,9 +61,10 @@ export default function Footer() {
           <div>
             <h4 className="font-extrabold text-white text-sm uppercase tracking-wider mb-5">Legal</h4>
             <ul className="space-y-2.5">
-              {legal.map((link) => (
-                <li key={link.name}><a href={link.href} className="text-gray-400 hover:text-primary text-sm transition-colors">{link.name}</a></li>
-              ))}
+              <li><button onClick={onPrivacy} className="text-gray-400 hover:text-primary text-sm transition-colors cursor-pointer text-left">Privacy Policy</button></li>
+              <li><button onClick={onTerms} className="text-gray-400 hover:text-primary text-sm transition-colors cursor-pointer text-left">Terms & Conditions</button></li>
+              <li><button onClick={onPrivacy} className="text-gray-400 hover:text-primary text-sm transition-colors cursor-pointer text-left">Contact Policy</button></li>
+              <li><button onClick={onPrivacy} className="text-gray-400 hover:text-primary text-sm transition-colors cursor-pointer text-left">POPIA Compliance</button></li>
             </ul>
           </div>
 
