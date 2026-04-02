@@ -27,9 +27,9 @@ export default function PrivacyPolicy({ onClose }) {
 
         {/* Scrollable content */}
         <div className="overflow-y-auto px-6 py-6">
-          <p className="text-primary font-bold text-base mb-4">Bard Santner Investors SA</p>
+          <p className="text-primary font-bold text-base mb-4">Bard Loans</p>
           <p className="text-gray-600 text-sm leading-relaxed mb-6">
-            At Bard Santner Investors SA, we are committed to protecting your privacy and ensuring the security of your personal information. We process personal data in compliance with the Protection of Personal Information Act (POPIA) and all applicable South African data protection legislation.
+            At Bard Loans, we are committed to protecting your privacy and ensuring the security of your personal information. We process personal data in compliance with the Protection of Personal Information Act (POPIA) and all applicable South African data protection legislation.
           </p>
 
           <div className="space-y-6">
@@ -53,7 +53,7 @@ export default function PrivacyPolicy({ onClose }) {
 
           <div className="mt-8 pt-6 border-t border-gray-200">
             <h3 className="text-base font-extrabold text-navy uppercase mb-2">10. Contact Us</h3>
-            <p className="text-gray-600 text-sm">Bard Santner Investors SA</p>
+            <p className="text-gray-600 text-sm">Bard Loans</p>
             <p className="text-gray-600 text-sm">2nd Floor Bowmans Building, 11 Alice Lane, Sandton, 2196</p>
             <p className="text-gray-600 text-sm">Tel: 067 615 1569 | Email: <a href="mailto:info@bardloans.co.za" className="text-primary hover:underline">info@bardloans.co.za</a></p>
           </div>

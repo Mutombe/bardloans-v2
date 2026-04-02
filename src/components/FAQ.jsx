@@ -10,7 +10,7 @@ const faqs = [
   { icon: Lightning, question: 'How fast is approval?', answer: 'Same day! Funds can be in your account within hours.' },
   { icon: IdentificationCard, question: 'What documents do I need?', answer: 'Three things: your SA ID document, a valid passport, and proof of income. That\'s it.' },
   { icon: Car, question: 'What is collateral lending?', answer: 'Use your vehicles or machinery as security for loans up to R100,000 with better terms.' },
-  { icon: ShieldCheck, question: 'Are you registered?', answer: 'Yes. Bard Santner Investors — authorised FSP and registered credit provider NCRCP12840.' },
+  { icon: ShieldCheck, question: 'Are you registered?', answer: 'Yes. Bard Loans — authorised FSP and registered credit provider NCRCP12840.' },
 ]
 
 function FAQItem({ faq, index, isOpen, onToggle }) {

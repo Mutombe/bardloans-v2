@@ -77,7 +77,7 @@ def add_document_page(c, w, h, title, file_obj):
     # Footer
     c.setFont('Helvetica', 6)
     c.setFillColor(GRAY)
-    c.drawString(25 * mm, 10 * mm, 'Bard Santner Investors SA — Authorised Financial Services Provider — NCRCP12840')
+    c.drawString(25 * mm, 10 * mm, 'Bard Loans — Authorised Financial Services Provider — NCRCP12840')
 
 
 def draw_section_header(c, y, title):
@@ -122,7 +122,7 @@ def generate_application_pdf(app, id_document=None, proof_of_employment=None):
     c.rect(0, h - 27 * mm, w, 2 * mm, fill=True, stroke=False)
     c.setFillColor(HexColor('#FFFFFF'))
     c.setFont('Helvetica-Bold', 16)
-    c.drawString(25 * mm, h - 17 * mm, 'BARD SANTNER INVESTORS SA')
+    c.drawString(25 * mm, h - 17 * mm, 'BARD LOANS')
     c.setFont('Helvetica', 9)
     c.drawString(130 * mm, h - 12 * mm, 'LOAN APPLICATION FORM')
     c.drawString(130 * mm, h - 17 * mm, f'Date: {app.application_date}')
@@ -184,7 +184,7 @@ def generate_application_pdf(app, id_document=None, proof_of_employment=None):
     # Footer
     c.setFont('Helvetica', 6)
     c.setFillColor(GRAY)
-    c.drawString(25 * mm, 15 * mm, 'Bard Santner Investors SA — Authorised Financial Services Provider — Registered Credit Provider NCRCP12840')
+    c.drawString(25 * mm, 15 * mm, 'Bard Loans — Authorised Financial Services Provider — Registered Credit Provider NCRCP12840')
     c.drawString(25 * mm, 10 * mm, '2nd Floor Bowmans Building, 11 Alice Lane, Sandton, 2196 | apply@bardloans.co.za | 067 615 1569')
 
     # Embed uploaded documents as additional pages if they are images

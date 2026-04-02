@@ -86,7 +86,7 @@ export default function Footer({ onPrivacy, onTerms }) {
         <div className="mt-12 pt-6 border-t border-white/10">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
             <p className="text-gray-500 text-xs text-center sm:text-left">
-              Bard Santner Investors authorised financial services provider and registered credit provider NCRCP12840
+              Bard Loans authorised financial services provider and registered credit provider NCRCP12840
             </p>
             <p className="text-gray-500 text-xs">&copy; {new Date().getFullYear()} Bard Loans. All rights reserved.</p>
           </div>

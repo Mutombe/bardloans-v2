@@ -303,13 +303,13 @@ export default function ApplicationForm() {
 
                 <div className="bg-gray-50 rounded-xl p-4 text-xs text-gray-500 leading-relaxed">
                   <p className="font-bold text-navy text-sm mb-2">DATA COLLECTION NOTICE</p>
-                  <p>Bard Santner Investors collects personal data for clients which includes name, contact details, employment details, income, expenses and references for the purposes of verifying client identity and assessing credit worthiness. Clients information may be shared with third party service providers, credit bureaus and regulatory authorities as required by law. Clients have the right to access, correct or delete their data by contacting dpo@bardsantner.com.</p>
+                  <p>Bard Loans collects personal data for clients which includes name, contact details, employment details, income, expenses and references for the purposes of verifying client identity and assessing credit worthiness. Clients information may be shared with third party service providers, credit bureaus and regulatory authorities as required by law. Clients have the right to access, correct or delete their data by contacting dpo@bardsantner.com.</p>
                 </div>
 
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} className="mt-1 w-5 h-5 rounded border-gray-300 text-primary accent-primary cursor-pointer" />
                   <span className="text-sm text-gray-600">
-                    I confirm that the information submitted belongs to me, the applicant, and I hereby give explicit, informed, and voluntary consent to Bard Santner Investors to collect, process, and store my personal data for the purposes stated above.
+                    I confirm that the information submitted belongs to me, the applicant, and I hereby give explicit, informed, and voluntary consent to Bard Loans to collect, process, and store my personal data for the purposes stated above.
                   </span>
                 </label>
               </motion.div>
