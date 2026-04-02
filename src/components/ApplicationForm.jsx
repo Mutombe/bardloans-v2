@@ -24,16 +24,16 @@ function LoanBreakdown({ amount, months }) {
   const fmt = (n) => `R${n.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 
   return (
-    <div className="bg-gradient-to-br from-navy-50/60 to-mint-50/40 rounded-xl p-4 space-y-1.5">
-      <h4 className="text-navy font-extrabold text-sm uppercase mb-2 flex items-center gap-1.5">
+    <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-1.5">
+      <h4 className="text-primary font-extrabold text-sm uppercase mb-2 flex items-center gap-1.5">
         <Info size={14} className="text-mint" /> Your Loan Breakdown
       </h4>
-      <div className="flex justify-between text-xs"><span className="text-gray-400">Interest (5%/mo)</span><span className="font-semibold text-navy">{fmt(interest)}</span></div>
-      <div className="flex justify-between text-xs"><span className="text-gray-400">Initiation (5%)</span><span className="font-semibold text-navy">{fmt(initiation)}</span></div>
-      <div className="flex justify-between text-xs"><span className="text-gray-400">Service fee (10%/mo)</span><span className="font-semibold text-navy">{fmt(serviceFee)}</span></div>
-      <div className="border-t border-gray-200/60 pt-1.5 mt-1.5">
-        <div className="flex justify-between text-sm"><span className="text-gray-500 font-medium">Total Repayable</span><span className="font-extrabold text-navy">{fmt(total)}</span></div>
-        {m > 1 && <div className="flex justify-between text-sm mt-0.5"><span className="text-gray-400">Monthly Instalment</span><span className="font-extrabold text-mint-dark">{fmt(monthly)}</span></div>}
+      <div className="flex justify-between text-xs"><span className="text-white/40">Interest (5%/mo)</span><span className="font-semibold text-white">{fmt(interest)}</span></div>
+      <div className="flex justify-between text-xs"><span className="text-white/40">Initiation (5%)</span><span className="font-semibold text-white">{fmt(initiation)}</span></div>
+      <div className="flex justify-between text-xs"><span className="text-white/40">Service fee (10%/mo)</span><span className="font-semibold text-white">{fmt(serviceFee)}</span></div>
+      <div className="border-t border-white/10 pt-1.5 mt-1.5">
+        <div className="flex justify-between text-sm"><span className="text-white/50 font-medium">Total Repayable</span><span className="font-extrabold text-primary">{fmt(total)}</span></div>
+        {m > 1 && <div className="flex justify-between text-sm mt-0.5"><span className="text-white/40">Monthly Instalment</span><span className="font-extrabold text-mint">{fmt(monthly)}</span></div>}
       </div>
     </div>
   )
@@ -120,18 +120,18 @@ export default function ApplicationForm() {
     }
   }
 
-  const inputClass = 'w-full bg-gray-50 border-2 border-gray-200 focus:border-primary focus:bg-white rounded-xl px-4 py-3 text-navy font-medium text-sm outline-none transition-colors'
+  const inputClass = 'w-full bg-white/10 border-2 border-white/15 focus:border-primary focus:bg-white/15 rounded-xl px-4 py-3 text-white font-medium text-sm outline-none transition-colors placeholder:text-white/30'
   const labelClass = 'block text-primary font-bold text-xs uppercase tracking-wide mb-1.5'
 
   if (submitted) {
     return (
-      <section id="apply-form" className="py-20 sm:py-28 bg-navy-dark">
+      <section id="apply-form" className="py-20 sm:py-28 bg-white">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <div className="w-20 h-20 rounded-full bg-mint/20 flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 rounded-full bg-mint/10 flex items-center justify-center mx-auto mb-6">
             <CheckCircle size={48} weight="bold" className="text-mint" />
           </div>
-          <h2 className="text-4xl font-extrabold text-white mb-4 uppercase">Application Submitted!</h2>
-          <p className="text-gray-400 text-lg mb-8">
+          <h2 className="text-4xl font-extrabold text-navy mb-4 uppercase">Application Submitted!</h2>
+          <p className="text-gray-500 text-lg mb-8">
             Your loan application has been received. We&apos;ll review it and get back to you within 24 hours.
           </p>
           <a href="#home" className="inline-flex items-center gap-2 bg-primary text-white font-extrabold text-sm px-8 py-3.5 rounded-full uppercase tracking-wide hover:scale-105 transition-transform">
@@ -143,17 +143,17 @@ export default function ApplicationForm() {
   }
 
   return (
-    <section id="apply-form" className="py-20 sm:py-28 bg-navy-dark relative">
+    <section id="apply-form" className="py-20 sm:py-28 bg-white relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 uppercase tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy mb-4 uppercase tracking-tight">
             Apply{' '}
             <span className="relative inline-block">
               <span className="relative z-10 px-3 text-white">Online</span>
               <span className="absolute inset-0 bg-primary rounded-md skew-x-[-2deg]" />
             </span>
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-500 text-lg">
             {prefilled ? 'Your loan details are pre-filled from the calculator. Complete your details below.' : 'Fill in the form below. It takes less than 5 minutes.'}
           </p>
         </motion.div>
@@ -169,24 +169,24 @@ export default function ApplicationForm() {
                 <button
                   onClick={() => i < step && setStep(i)}
                   className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wide transition-all ${
-                    active ? 'bg-primary text-white shadow-lg' : done ? 'bg-mint/20 text-mint cursor-pointer' : 'bg-white/10 text-gray-400'
+                    active ? 'bg-primary text-white shadow-lg' : done ? 'bg-mint/10 text-mint-dark cursor-pointer' : 'bg-gray-100 text-gray-400'
                   }`}
                 >
                   {done ? <CheckCircle size={16} weight="fill" /> : <Icon size={16} weight="bold" />}
                   <span className="hidden sm:inline">{s.label}</span>
                 </button>
-                {i < STEPS.length - 1 && <div className={`w-6 sm:w-10 h-0.5 ${i < step ? 'bg-mint' : 'bg-white/20'}`} />}
+                {i < STEPS.length - 1 && <div className={`w-6 sm:w-10 h-0.5 ${i < step ? 'bg-mint' : 'bg-gray-200'}`} />}
               </div>
             )
           })}
         </div>
 
-        {/* Form steps */}
-        <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
+        {/* Form card — navy body */}
+        <div className="bg-navy rounded-2xl shadow-2xl p-6 sm:p-8">
           <AnimatePresence mode="wait">
             {step === 0 && (
               <motion.div key="step0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
-                <h3 className="text-2xl font-extrabold text-navy uppercase mb-6">Personal Details</h3>
+                <h3 className="text-2xl font-extrabold text-white uppercase mb-6">Personal Details</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div><label className={labelClass}>Surname *</label><input className={inputClass} value={form.surname} onChange={e => update('surname', e.target.value)} /></div>
                   <div><label className={labelClass}>First Name *</label><input className={inputClass} value={form.firstName} onChange={e => update('firstName', e.target.value)} /></div>
@@ -209,7 +209,7 @@ export default function ApplicationForm() {
                   <div><label className={labelClass}>Contact Number *</label><input className={inputClass} value={form.contactNumber} onChange={e => update('contactNumber', e.target.value)} /></div>
                   <div><label className={labelClass}>Alternative Number</label><input className={inputClass} value={form.alternativeNumber} onChange={e => update('alternativeNumber', e.target.value)} /></div>
                 </div>
-                <h4 className="text-lg font-extrabold text-navy uppercase pt-4">Next of Kin</h4>
+                <h4 className="text-lg font-extrabold text-white/80 uppercase pt-4">Next of Kin</h4>
                 <div className="grid sm:grid-cols-3 gap-4">
                   <div><label className={labelClass}>Full Name</label><input className={inputClass} value={form.nextOfKin} onChange={e => update('nextOfKin', e.target.value)} /></div>
                   <div><label className={labelClass}>Relationship</label><input className={inputClass} value={form.relationship} onChange={e => update('relationship', e.target.value)} /></div>
@@ -220,7 +220,7 @@ export default function ApplicationForm() {
 
             {step === 1 && (
               <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
-                <h3 className="text-2xl font-extrabold text-navy uppercase mb-6">Employment Details</h3>
+                <h3 className="text-2xl font-extrabold text-white uppercase mb-6">Employment Details</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div><label className={labelClass}>Name of Employer *</label><input className={inputClass} value={form.employerName} onChange={e => update('employerName', e.target.value)} /></div>
                   <div><label className={labelClass}>Position Held *</label><input className={inputClass} value={form.positionHeld} onChange={e => update('positionHeld', e.target.value)} /></div>
@@ -241,14 +241,14 @@ export default function ApplicationForm() {
 
             {step === 2 && (
               <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
-                <h3 className="text-2xl font-extrabold text-navy uppercase mb-6">Banking Details</h3>
+                <h3 className="text-2xl font-extrabold text-white uppercase mb-6">Banking Details</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div><label className={labelClass}>Bank Name *</label><input className={inputClass} value={form.bankName} onChange={e => update('bankName', e.target.value)} /></div>
                   <div><label className={labelClass}>Branch</label><input className={inputClass} value={form.branch} onChange={e => update('branch', e.target.value)} /></div>
                   <div><label className={labelClass}>Account Number *</label><input className={inputClass} value={form.accountNumber} onChange={e => update('accountNumber', e.target.value)} /></div>
                   <div><label className={labelClass}>Account Name</label><input className={inputClass} value={form.accountName} onChange={e => update('accountName', e.target.value)} /></div>
                 </div>
-                <h4 className="text-lg font-extrabold text-navy uppercase pt-4">Loan Details</h4>
+                <h4 className="text-lg font-extrabold text-white/80 uppercase pt-4">Loan Details</h4>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div><label className={labelClass}>Loan Amount (R) *</label><input type="number" className={inputClass} value={form.loanAmount} onChange={e => update('loanAmount', e.target.value)} placeholder="500 - 350,000" /></div>
                   <div><label className={labelClass}>Repayment Period</label>
@@ -263,7 +263,7 @@ export default function ApplicationForm() {
                 {form.loanAmount && <LoanBreakdown amount={form.loanAmount} months={form.repaymentPeriod} />}
 
                 {prefilled && (
-                  <div className="bg-mint-50 border border-mint/20 rounded-xl p-3 flex items-center gap-2 text-mint-dark text-sm">
+                  <div className="bg-mint/10 border border-mint/20 rounded-xl p-3 flex items-center gap-2 text-mint text-sm">
                     <CheckCircle size={18} weight="fill" />
                     Loan details pre-filled from calculator. Adjust if needed.
                   </div>
@@ -273,24 +273,24 @@ export default function ApplicationForm() {
 
             {step === 3 && (
               <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-                <h3 className="text-2xl font-extrabold text-navy uppercase mb-6">Upload & Sign</h3>
+                <h3 className="text-2xl font-extrabold text-white uppercase mb-6">Upload & Sign</h3>
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className={labelClass}>ID Document *</label>
-                    <label className={`flex flex-col items-center gap-2 p-6 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${idFile ? 'border-mint bg-mint/5' : 'border-gray-200 hover:border-primary bg-gray-50'}`}>
-                      {idFile ? <CheckCircle size={32} weight="fill" className="text-mint" /> : <CloudArrowUp size={32} className="text-gray-400" />}
-                      <span className="text-sm font-bold text-navy">{idFile ? idFile.name : 'Upload ID'}</span>
-                      <span className="text-xs text-gray-400">PDF, JPG or PNG</span>
+                    <label className={`flex flex-col items-center gap-2 p-6 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${idFile ? 'border-mint bg-mint/10' : 'border-white/20 hover:border-primary bg-white/5'}`}>
+                      {idFile ? <CheckCircle size={32} weight="fill" className="text-mint" /> : <CloudArrowUp size={32} className="text-white/40" />}
+                      <span className="text-sm font-bold text-white">{idFile ? idFile.name : 'Upload ID'}</span>
+                      <span className="text-xs text-white/40">PDF, JPG or PNG</span>
                       <input type="file" className="hidden" accept=".pdf,.jpg,.jpeg,.png" onChange={e => setIdFile(e.target.files[0])} />
                     </label>
                   </div>
                   <div>
                     <label className={labelClass}>Proof of Income *</label>
-                    <label className={`flex flex-col items-center gap-2 p-6 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${proofFile ? 'border-mint bg-mint/5' : 'border-gray-200 hover:border-primary bg-gray-50'}`}>
-                      {proofFile ? <CheckCircle size={32} weight="fill" className="text-mint" /> : <CloudArrowUp size={32} className="text-gray-400" />}
-                      <span className="text-sm font-bold text-navy">{proofFile ? proofFile.name : 'Upload Payslip / Bank Statement'}</span>
-                      <span className="text-xs text-gray-400">PDF, JPG or PNG</span>
+                    <label className={`flex flex-col items-center gap-2 p-6 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${proofFile ? 'border-mint bg-mint/10' : 'border-white/20 hover:border-primary bg-white/5'}`}>
+                      {proofFile ? <CheckCircle size={32} weight="fill" className="text-mint" /> : <CloudArrowUp size={32} className="text-white/40" />}
+                      <span className="text-sm font-bold text-white">{proofFile ? proofFile.name : 'Upload Payslip / Bank Statement'}</span>
+                      <span className="text-xs text-white/40">PDF, JPG or PNG</span>
                       <input type="file" className="hidden" accept=".pdf,.jpg,.jpeg,.png" onChange={e => setProofFile(e.target.files[0])} />
                     </label>
                   </div>
@@ -301,14 +301,14 @@ export default function ApplicationForm() {
                   <SignaturePad onSignature={setSignature} />
                 </div>
 
-                <div className="bg-gray-50 rounded-xl p-4 text-xs text-gray-500 leading-relaxed">
-                  <p className="font-bold text-navy text-sm mb-2">DATA COLLECTION NOTICE</p>
+                <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-xs text-white/50 leading-relaxed">
+                  <p className="font-bold text-primary text-sm mb-2">DATA COLLECTION NOTICE</p>
                   <p>Bard Loans collects personal data for clients which includes name, contact details, employment details, income, expenses and references for the purposes of verifying client identity and assessing credit worthiness. Clients information may be shared with third party service providers, credit bureaus and regulatory authorities as required by law. Clients have the right to access, correct or delete their data by contacting dpo@bardsantner.com.</p>
                 </div>
 
                 <label className="flex items-start gap-3 cursor-pointer">
-                  <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} className="mt-1 w-5 h-5 rounded border-gray-300 text-primary accent-primary cursor-pointer" />
-                  <span className="text-sm text-gray-600">
+                  <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} className="mt-1 w-5 h-5 rounded border-white/30 text-primary accent-primary cursor-pointer" />
+                  <span className="text-sm text-white/60">
                     I confirm that the information submitted belongs to me, the applicant, and I hereby give explicit, informed, and voluntary consent to Bard Loans to collect, process, and store my personal data for the purposes stated above.
                   </span>
                 </label>
@@ -317,16 +317,16 @@ export default function ApplicationForm() {
           </AnimatePresence>
 
           {error && (
-            <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm">
+            <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-2 text-red-400 text-sm">
               <WarningCircle size={18} weight="bold" />
               {error}
             </div>
           )}
 
           {/* Navigation */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-200">
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/10">
             {step > 0 ? (
-              <button onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 text-navy font-bold text-sm uppercase tracking-wide hover:text-primary transition-colors cursor-pointer">
+              <button onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 text-white/70 font-bold text-sm uppercase tracking-wide hover:text-primary transition-colors cursor-pointer">
                 <ArrowLeft size={18} weight="bold" /> Back
               </button>
             ) : <div />}
@@ -336,7 +336,7 @@ export default function ApplicationForm() {
                 onClick={() => canProceed() && setStep(s => s + 1)}
                 disabled={!canProceed()}
                 className={`flex items-center gap-2 px-8 py-3 rounded-full font-extrabold text-sm uppercase tracking-wide transition-all ${
-                  canProceed() ? 'bg-primary text-white shadow-lg hover:scale-105 cursor-pointer' : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  canProceed() ? 'bg-primary text-white shadow-lg hover:scale-105 cursor-pointer' : 'bg-white/10 text-white/30 cursor-not-allowed'
                 }`}
               >
                 Next <ArrowRight size={18} weight="bold" />
@@ -346,7 +346,7 @@ export default function ApplicationForm() {
                 onClick={handleSubmit}
                 disabled={!canProceed() || submitting}
                 className={`flex items-center gap-2 px-8 py-3.5 rounded-full font-extrabold text-sm uppercase tracking-wide transition-all ${
-                  canProceed() && !submitting ? 'bg-primary text-white shadow-lg hover:scale-105 cursor-pointer' : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  canProceed() && !submitting ? 'bg-primary text-white shadow-lg hover:scale-105 cursor-pointer' : 'bg-white/10 text-white/30 cursor-not-allowed'
                 }`}
               >
                 {submitting ? 'Submitting...' : <>Submit Application <PaperPlaneTilt size={18} weight="bold" /></>}
