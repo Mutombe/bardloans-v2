@@ -1,4 +1,5 @@
 import io
+import os
 import base64
 from PIL import Image
 from reportlab.lib.pagesizes import A4
@@ -6,6 +7,8 @@ from reportlab.lib.units import mm
 from reportlab.lib.colors import HexColor
 from reportlab.pdfgen import canvas
 from reportlab.lib.utils import ImageReader
+
+LOGO_PATH = os.path.join(os.path.dirname(__file__), 'logo.png')
 
 
 NAVY = HexColor('#1B1464')
@@ -117,12 +120,21 @@ def generate_application_pdf(app, id_document=None, proof_of_employment=None):
 
     # Header
     c.setFillColor(NAVY)
-    c.rect(0, h - 25 * mm, w, 25 * mm, fill=True, stroke=False)
+    c.rect(0, h - 28 * mm, w, 28 * mm, fill=True, stroke=False)
     c.setFillColor(ORANGE)
-    c.rect(0, h - 27 * mm, w, 2 * mm, fill=True, stroke=False)
+    c.rect(0, h - 30 * mm, w, 2 * mm, fill=True, stroke=False)
+
+    # Logo
+    if os.path.exists(LOGO_PATH):
+        try:
+            logo = ImageReader(LOGO_PATH)
+            c.drawImage(logo, 15 * mm, h - 25 * mm, width=22 * mm, height=22 * mm, preserveAspectRatio=True, mask='auto')
+        except Exception:
+            pass
+
     c.setFillColor(HexColor('#FFFFFF'))
     c.setFont('Helvetica-Bold', 16)
-    c.drawString(25 * mm, h - 17 * mm, 'BARD LOANS')
+    c.drawString(40 * mm, h - 17 * mm, 'BARD LOANS')
     c.setFont('Helvetica', 9)
     c.drawString(130 * mm, h - 12 * mm, 'LOAN APPLICATION FORM')
     c.drawString(130 * mm, h - 17 * mm, f'Date: {app.application_date}')

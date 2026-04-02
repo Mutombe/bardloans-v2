@@ -120,18 +120,18 @@ export default function ApplicationForm() {
     }
   }
 
-  const inputClass = 'w-full bg-white border-2 border-gray-100 focus:border-primary rounded-xl px-4 py-3 text-navy font-medium text-sm outline-none transition-colors'
-  const labelClass = 'block text-navy font-bold text-xs uppercase tracking-wide mb-1.5'
+  const inputClass = 'w-full bg-gray-50 border-2 border-gray-200 focus:border-primary focus:bg-white rounded-xl px-4 py-3 text-navy font-medium text-sm outline-none transition-colors'
+  const labelClass = 'block text-primary font-bold text-xs uppercase tracking-wide mb-1.5'
 
   if (submitted) {
     return (
-      <section id="apply-form" className="py-20 sm:py-28 bg-white">
+      <section id="apply-form" className="py-20 sm:py-28 bg-navy-dark">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <div className="w-20 h-20 rounded-full bg-mint/10 flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 rounded-full bg-mint/20 flex items-center justify-center mx-auto mb-6">
             <CheckCircle size={48} weight="bold" className="text-mint" />
           </div>
-          <h2 className="text-4xl font-extrabold text-navy mb-4 uppercase">Application Submitted!</h2>
-          <p className="text-gray-500 text-lg mb-8">
+          <h2 className="text-4xl font-extrabold text-white mb-4 uppercase">Application Submitted!</h2>
+          <p className="text-gray-400 text-lg mb-8">
             Your loan application has been received. We&apos;ll review it and get back to you within 24 hours.
           </p>
           <a href="#home" className="inline-flex items-center gap-2 bg-primary text-white font-extrabold text-sm px-8 py-3.5 rounded-full uppercase tracking-wide hover:scale-105 transition-transform">
@@ -143,17 +143,17 @@ export default function ApplicationForm() {
   }
 
   return (
-    <section id="apply-form" className="py-20 sm:py-28 bg-white relative">
+    <section id="apply-form" className="py-20 sm:py-28 bg-navy-dark relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy mb-4 uppercase tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 uppercase tracking-tight">
             Apply{' '}
             <span className="relative inline-block">
               <span className="relative z-10 px-3 text-white">Online</span>
               <span className="absolute inset-0 bg-primary rounded-md skew-x-[-2deg]" />
             </span>
           </h2>
-          <p className="text-gray-500 text-lg">
+          <p className="text-gray-400 text-lg">
             {prefilled ? 'Your loan details are pre-filled from the calculator. Complete your details below.' : 'Fill in the form below. It takes less than 5 minutes.'}
           </p>
         </motion.div>
@@ -169,20 +169,20 @@ export default function ApplicationForm() {
                 <button
                   onClick={() => i < step && setStep(i)}
                   className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wide transition-all ${
-                    active ? 'bg-primary text-white shadow-lg' : done ? 'bg-mint/10 text-mint-dark cursor-pointer' : 'bg-gray-100 text-gray-400'
+                    active ? 'bg-primary text-white shadow-lg' : done ? 'bg-mint/20 text-mint cursor-pointer' : 'bg-white/10 text-gray-400'
                   }`}
                 >
                   {done ? <CheckCircle size={16} weight="fill" /> : <Icon size={16} weight="bold" />}
                   <span className="hidden sm:inline">{s.label}</span>
                 </button>
-                {i < STEPS.length - 1 && <div className={`w-6 sm:w-10 h-0.5 ${i < step ? 'bg-mint' : 'bg-gray-200'}`} />}
+                {i < STEPS.length - 1 && <div className={`w-6 sm:w-10 h-0.5 ${i < step ? 'bg-mint' : 'bg-white/20'}`} />}
               </div>
             )
           })}
         </div>
 
         {/* Form steps */}
-        <div className="bg-white rounded-2xl border-2 border-navy/20 shadow-lg shadow-navy/5 p-6 sm:p-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
           <AnimatePresence mode="wait">
             {step === 0 && (
               <motion.div key="step0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
@@ -324,7 +324,7 @@ export default function ApplicationForm() {
           )}
 
           {/* Navigation */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-200">
             {step > 0 ? (
               <button onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 text-navy font-bold text-sm uppercase tracking-wide hover:text-primary transition-colors cursor-pointer">
                 <ArrowLeft size={18} weight="bold" /> Back
