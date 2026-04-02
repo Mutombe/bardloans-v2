@@ -8,7 +8,7 @@ from reportlab.lib.colors import HexColor
 from reportlab.pdfgen import canvas
 from reportlab.lib.utils import ImageReader
 
-LOGO_PATH = os.path.join(os.path.dirname(__file__), 'logo.png')
+FAVICON_PATH = os.path.join(os.path.dirname(__file__), 'favicon.png')
 
 
 NAVY = HexColor('#1B1464')
@@ -124,17 +124,17 @@ def generate_application_pdf(app, id_document=None, proof_of_employment=None):
     c.setFillColor(ORANGE)
     c.rect(0, h - 30 * mm, w, 2 * mm, fill=True, stroke=False)
 
-    # Logo
-    if os.path.exists(LOGO_PATH):
+    # Favicon + title
+    if os.path.exists(FAVICON_PATH):
         try:
-            logo = ImageReader(LOGO_PATH)
-            c.drawImage(logo, 15 * mm, h - 25 * mm, width=22 * mm, height=22 * mm, preserveAspectRatio=True, mask='auto')
+            icon = ImageReader(FAVICON_PATH)
+            c.drawImage(icon, 18 * mm, h - 23 * mm, width=14 * mm, height=14 * mm, preserveAspectRatio=True, mask='auto')
         except Exception:
             pass
 
     c.setFillColor(HexColor('#FFFFFF'))
     c.setFont('Helvetica-Bold', 16)
-    c.drawString(40 * mm, h - 17 * mm, 'BARD LOANS')
+    c.drawString(35 * mm, h - 18 * mm, 'BARD LOANS')
     c.setFont('Helvetica', 9)
     c.drawString(130 * mm, h - 12 * mm, 'LOAN APPLICATION FORM')
     c.drawString(130 * mm, h - 17 * mm, f'Date: {app.application_date}')
