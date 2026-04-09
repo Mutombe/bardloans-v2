@@ -90,6 +90,7 @@ export default function Footer({ onPrivacy, onTerms }) {
             </p>
             <p className="text-gray-500 text-xs">&copy; {new Date().getFullYear()} Bard Loans. All rights reserved.</p>
           </div>
+          <p className="text-gray-600 text-xs text-center mt-3">Built by <a href="https://bitstudio.co.za" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">Bit Studio</a></p>
         </div>
       </div>
     </footer>
